@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
+import LogoM from './LogoM';
 
 interface HeaderProps {
   scrolled: boolean;
@@ -27,7 +28,15 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex-shrink-0">
-          <Logo size={scrolled ? 'small' : 'large'} />
+          {/* Logo per la versione desktop */}
+          <div className="hidden md:block">
+            <Logo size={scrolled ? 'small' : 'large'} />
+          </div>
+
+          {/* LogoM per la versione mobile */}
+          <div className="block md:hidden">
+            <LogoM size={scrolled ? 'small' : 'large'} />
+          </div>
         </div>
 
         {/* Desktop Navigation */}
