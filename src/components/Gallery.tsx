@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Section from '../layout/Section';
 import { X } from 'lucide-react';
 import { galleryImages } from '../constants';
+import { useTranslation } from 'react-i18next';
 
 const Gallery: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const openModal = (imageUrl: string) => {
@@ -20,10 +22,10 @@ const Gallery: React.FC = () => {
     <Section id="gallery" className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-bakery-brown">Our Cake Gallery</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-bakery-brown">{t('gallery.title')}</h2>
           <div className="w-24 h-1 bg-bakery-blue mx-auto"></div>
           <p className="mt-4 max-w-2xl mx-auto">
-            Browse through our collection of custom-designed cakes for weddings, birthdays, and special events.
+            {t('gallery.description')}
           </p>
         </div>
 

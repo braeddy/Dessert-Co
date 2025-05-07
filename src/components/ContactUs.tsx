@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import Section from '../layout/Section';
+import { useTranslation } from 'react-i18next';
 
 const ContactUs: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,26 +41,24 @@ const ContactUs: React.FC = () => {
     <Section id="contact" className="bg-bakery-cream bg-opacity-30 py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-bakery-brown">Contattaci</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-bakery-brown">{t('contact.title')}</h2>
           <div className="w-24 h-1 bg-bakery-pink mx-auto"></div>
-            <p className="mt-4 max-w-2xl mx-auto">
-            Vuoi fare un ordine o hai domande? Contattaci oggi stesso! Saremo felici di aiutarti a realizzare i tuoi sogni di torta.
-            </p>
+          <p className="mt-4 max-w-2xl mx-auto">{t('contact.description')}</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12">
           <div className="lg:w-1/2">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="font-serif text-2xl font-semibold mb-6 text-bakery-brown">Send Us a Message</h3>
+              <h3 className="font-serif text-2xl font-semibold mb-6 text-bakery-brown">{t('contact.formTitle')}</h3>
               
               {submitted ? (
                 <div className="bg-green-50 text-green-700 p-4 rounded-md mb-4">
-                  Thank you for your message! We'll get back to you soon.
+                  {t('contact.successMessage')}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="name" className="block text-bakery-brown mb-2">Name</label>
+                    <label htmlFor="name" className="block text-bakery-brown mb-2">{t('contact.form.name')}</label>
                     <input
                       type="text"
                       id="name"
@@ -71,7 +71,7 @@ const ContactUs: React.FC = () => {
                   </div>
                   
                   <div className="mb-4">
-                    <label htmlFor="email" className="block text-bakery-brown mb-2">Email</label>
+                    <label htmlFor="email" className="block text-bakery-brown mb-2">{t('contact.form.email')}</label>
                     <input
                       type="email"
                       id="email"
@@ -84,7 +84,7 @@ const ContactUs: React.FC = () => {
                   </div>
                   
                   <div className="mb-4">
-                    <label htmlFor="phone" className="block text-bakery-brown mb-2">Phone Number</label>
+                    <label htmlFor="phone" className="block text-bakery-brown mb-2">{t('contact.form.phone')}</label>
                     <input
                       type="tel"
                       id="phone"
@@ -96,7 +96,7 @@ const ContactUs: React.FC = () => {
                   </div>
                   
                   <div className="mb-6">
-                    <label htmlFor="message" className="block text-bakery-brown mb-2">Message</label>
+                    <label htmlFor="message" className="block text-bakery-brown mb-2">{t('contact.form.message')}</label>
                     <textarea
                       id="message"
                       name="message"
@@ -114,11 +114,11 @@ const ContactUs: React.FC = () => {
                     className="w-full bg-bakery-brown text-white py-3 rounded-md hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
-                      'Sending...'
+                      t('contact.form.sending')
                     ) : (
                       <>
                         <Send size={18} />
-                        <span>Send Message</span>
+                        <span>{t('contact.form.send')}</span>
                       </>
                     )}
                   </button>
@@ -129,7 +129,7 @@ const ContactUs: React.FC = () => {
           
           <div className="lg:w-1/2">
             <div className="bg-white p-6 rounded-lg shadow-md h-full">
-              <h3 className="font-serif text-2xl font-semibold mb-6 text-bakery-brown">Visit Our Bakery</h3>
+              <h3 className="font-serif text-2xl font-semibold mb-6 text-bakery-brown">{t('contact.visitTitle')}</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -137,8 +137,8 @@ const ContactUs: React.FC = () => {
                     <MapPin className="text-bakery-brown" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-serif font-semibold mb-1">Address</h4>
-                    <p className="text-gray-700">Via Roma 123, 57025 Piombino (LI), Italy</p>
+                    <h4 className="font-serif font-semibold mb-1">{t('contact.addressTitle')}</h4>
+                    <p className="text-gray-700">{t('contact.address')}</p>
                   </div>
                 </div>
                 
@@ -147,8 +147,8 @@ const ContactUs: React.FC = () => {
                     <Phone className="text-bakery-brown" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-serif font-semibold mb-1">Phone</h4>
-                    <p className="text-gray-700">+39 0565 123456</p>
+                    <h4 className="font-serif font-semibold mb-1">{t('contact.phoneTitle')}</h4>
+                    <p className="text-gray-700">{t('contact.phone')}</p>
                   </div>
                 </div>
                 
@@ -157,25 +157,25 @@ const ContactUs: React.FC = () => {
                     <Mail className="text-bakery-brown" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-serif font-semibold mb-1">Email</h4>
-                    <p className="text-gray-700">info@dessertandco.it</p>
+                    <h4 className="font-serif font-semibold mb-1">{t('contact.emailTitle')}</h4>
+                    <p className="text-gray-700">{t('contact.email')}</p>
                   </div>
                 </div>
                 
                 <div className="mt-8">
-                  <h4 className="font-serif font-semibold mb-3">Business Hours</h4>
+                  <h4 className="font-serif font-semibold mb-3">{t('contact.hoursTitle')}</h4>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span>Monday - Friday</span>
-                      <span>9:00 - 18:00</span>
+                      <span>{t('contact.hours.weekdays')}</span>
+                      <span>{t('contact.hours.weekdaysTime')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Saturday</span>
-                      <span>9:00 - 15:00</span>
+                      <span>{t('contact.hours.sunday')}</span>
+                      <span>{t('contact.hours.sundayTime')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Sunday</span>
-                      <span>Closed</span>
+                      <span>{t('contact.hours.monday')}</span>
+                      <span>{t('contact.hours.mondayTime')}</span>
                     </div>
                   </div>
                 </div>
