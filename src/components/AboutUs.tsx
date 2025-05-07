@@ -18,7 +18,7 @@ const AboutUs: React.FC = () => {
           <div className="md:w-1/2">
             <div className="relative">
               <img 
-                src="https://images.pexels.com/photos/6941028/pexels-photo-6941028.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
+                src="/aboutus-image-2.jpg" 
                 alt={t('about.imageAlt')} 
                 className="rounded-lg shadow-xl"
               />
