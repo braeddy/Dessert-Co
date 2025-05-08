@@ -20,13 +20,23 @@ const ContactUs: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Si è verificato un errore nell\'invio del messaggio');
+      }
+
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
       
@@ -34,7 +44,11 @@ const ContactUs: React.FC = () => {
       setTimeout(() => {
         setSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      alert(t('contact.errorMessage') || 'Si è verificato un errore nell\'invio del messaggio');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
