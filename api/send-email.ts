@@ -1,18 +1,29 @@
 import { Resend } from 'resend';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const config = {
+  runtime: 'edge',
+};
 
-const handler = async (request: VercelRequest, response: VercelResponse) => {
+export default async function handler(
+  request: Request
+): Promise<Response> {
   if (request.method !== 'POST') {
-    return response.status(405).json({ message: 'Method not allowed' });
+    return new Response(JSON.stringify({ message: 'Method not allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   try {
-    const { name, email, phone, message } = request.body;
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const body = await request.json();
+    const { name, email, phone, message } = body;
 
     if (!name || !email || !message) {
-      return response.status(400).json({ message: 'Name, email and message are required' });
+      return new Response(JSON.stringify({ message: 'Name, email and message are required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     const { data, error } = await resend.emails.send({
@@ -31,14 +42,21 @@ const handler = async (request: VercelRequest, response: VercelResponse) => {
 
     if (error) {
       console.error('Errore nell\'invio dell\'email:', error);
-      return response.status(500).json({ message: 'Errore nell\'invio dell\'email' });
+      return new Response(JSON.stringify({ message: 'Errore nell\'invio dell\'email' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
-    return response.status(200).json({ message: 'Email inviata con successo' });
+    return new Response(JSON.stringify({ message: 'Email inviata con successo' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('Errore nell\'invio dell\'email:', error);
-    return response.status(500).json({ message: 'Errore nell\'invio dell\'email' });
+    return new Response(JSON.stringify({ message: 'Errore nell\'invio dell\'email' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
-};
-
-export default handler;
+}

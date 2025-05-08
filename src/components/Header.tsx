@@ -41,19 +41,19 @@ const LanguageSwitcher: React.FC = () => {
       >
         <button 
           onClick={() => changeLanguage('it')} 
-          className="block w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
+          className="w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
         >
           🇮🇹 IT
         </button>
         <button 
           onClick={() => changeLanguage('en')} 
-          className="block w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
+          className="w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
         >
           🇬🇧 EN
         </button>
         <button 
           onClick={() => changeLanguage('de')} 
-          className="block w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
+          className="w-full text-left px-4 py-2 hover:bg-bakery-blue hover:text-white flex items-center gap-2"
         >
           🇩🇪 DE
         </button>
