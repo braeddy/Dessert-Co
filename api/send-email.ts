@@ -1,30 +1,26 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// Configurazione del trasportatore email
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-});
-
-// Definizione della funzione handler come export default
-const handler = async (req: VercelRequest, res: VercelResponse) => {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+const handler = async (request: VercelRequest, response: VercelResponse) => {
+  if (request.method !== 'POST') {
+    return response.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
-    const { name, email, phone, message } = req.body;
+    const { name, email, phone, message } = request.body;
 
-    // Validazione dei campi richiesti
     if (!name || !email || !message) {
-      return res.status(400).json({ message: 'Name, email and message are required' });
+      return response.status(400).json({ message: 'Name, email and message are required' });
     }
 
-    // Configurazione dell'email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      },
+    });
+
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: 'francesco.frediani@gmail.com',
@@ -39,13 +35,11 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
       `
     };
 
-    // Invio dell'email
     await transporter.sendMail(mailOptions);
-
-    return res.status(200).json({ message: 'Email inviata con successo' });
+    return response.status(200).json({ message: 'Email inviata con successo' });
   } catch (error) {
     console.error('Errore nell\'invio dell\'email:', error);
-    return res.status(500).json({ message: 'Errore nell\'invio dell\'email' });
+    return response.status(500).json({ message: 'Errore nell\'invio dell\'email' });
   }
 };
 
