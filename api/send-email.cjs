@@ -1,6 +1,4 @@
 import { Resend } from 'resend';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 
 // Inizializza Resend con la tua API Key
 const resend = new Resend(process.env.RESEND_API_KEY);
