@@ -1,42 +1,55 @@
 import { Resend } from 'resend';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+
+// Inizializza Resend con la tua API Key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
-  const { name, email, phone, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: 'Name, email, and message are required.' });
+const handler = async (request, response) => {
+  if (request.method !== 'POST') {
+    return response.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Contatti Sito <noreply@tuodominio.com>', // Cambia con dominio verificato
-      to: ['francesco.frediani@gmail.com'],
-      subject: `Nuovo messaggio dal sito - ${name}`,
-      html: `
-        <h2>Hai ricevuto un nuovo messaggio</h2>
-        <p><strong>Nome:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Telefono:</strong> ${phone || 'Non specificato'}</p>
-        <p><strong>Messaggio:</strong></p>
-        <p>${message}</p>
-      `,
-    });
+    const { name, email, phone, message } = request.body;
 
-    if (error) {
-      console.error('Errore Resend:', error);
-      return res.status(500).json({ message: 'Errore nell\'invio dell\'email con Resend.' });
+    // Verifica che i campi principali siano presenti
+    if (!name || !email || !message) {
+      return response.status(400).json({ message: 'Name, email, and message are required' });
     }
 
-    return res.status(200).json({ message: 'Email inviata con successo tramite Resend.' });
-  } catch (err) {
-    console.error('Errore generale:', err);
-    return res.status(500).json({ message: 'Errore imprevisto.' });
+    // Prepara il contenuto dell'email
+    const emailContent = `
+      <h2>Nuovo messaggio dal form di contatto</h2>
+      <p><strong>Nome:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Telefono:</strong> ${phone || 'Non specificato'}</p>
+      <p><strong>Messaggio:</strong></p>
+      <p>${message}</p>
+    `;
+
+    // Verifica che la variabile EMAIL_USER esista
+    if (!process.env.EMAIL_USER) {
+      throw new Error('Variabile di ambiente EMAIL_USER non definita');
+    }
+
+    // Invia l'email con Resend usando la corretta sintassi async/await
+    const responseEmail = await resend.emails.send({
+      from: process.env.EMAIL_USER,  // Questa variabile deve essere definita nel .env
+      to: 'francesco.frediani@gmail.com',
+      subject: `Nuovo messaggio dal sito - ${name}`,
+      html: emailContent,
+    });
+
+    // Risposta di successo
+    return response.status(200).json({ message: 'Email inviata con successo' });
+
+  } catch (error) {
+    console.error('Errore nell\'invio dell\'email:', error);
+    return response.status(500).json({ message: 'Errore nell\'invio dell\'email' });
   }
-}
+};
+
+export default handler;
+
+
