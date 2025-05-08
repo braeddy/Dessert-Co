@@ -1,16 +1,17 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
 
 // Configurazione del trasportatore email
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER, // la tua email
-    pass: process.env.EMAIL_PASS  // la tua password per le app
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   },
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+// Definizione della funzione handler come export default
+const handler = async (req: VercelRequest, res: VercelResponse) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
@@ -46,4 +47,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.error('Errore nell\'invio dell\'email:', error);
     return res.status(500).json({ message: 'Errore nell\'invio dell\'email' });
   }
-}
+};
+
+export default handler;
