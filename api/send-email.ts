@@ -1,62 +1,42 @@
 import { Resend } from 'resend';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export const config = {
-  runtime: 'edge',
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(
-  request: Request
-): Promise<Response> {
-  if (request.method !== 'POST') {
-    return new Response(JSON.stringify({ message: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-    });
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  const { name, email, phone, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: 'Name, email, and message are required.' });
   }
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const body = await request.json();
-    const { name, email, phone, message } = body;
-
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ message: 'Name, email and message are required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
     const { data, error } = await resend.emails.send({
-      from: 'Sito Dessert <onboarding@resend.dev>',
-      to: 'francesco.frediani@gmail.com',
+      from: 'Contatti Sito <noreply@tuodominio.com>', // Cambia con dominio verificato
+      to: ['francesco.frediani@gmail.com'],
       subject: `Nuovo messaggio dal sito - ${name}`,
       html: `
-        <h2>Nuovo messaggio dal form di contatto</h2>
+        <h2>Hai ricevuto un nuovo messaggio</h2>
         <p><strong>Nome:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Telefono:</strong> ${phone || 'Non specificato'}</p>
         <p><strong>Messaggio:</strong></p>
         <p>${message}</p>
-      `
+      `,
     });
 
     if (error) {
-      console.error('Errore nell\'invio dell\'email:', error);
-      return new Response(JSON.stringify({ message: 'Errore nell\'invio dell\'email' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      console.error('Errore Resend:', error);
+      return res.status(500).json({ message: 'Errore nell\'invio dell\'email con Resend.' });
     }
 
-    return new Response(JSON.stringify({ message: 'Email inviata con successo' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    console.error('Errore nell\'invio dell\'email:', error);
-    return new Response(JSON.stringify({ message: 'Errore nell\'invio dell\'email' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return res.status(200).json({ message: 'Email inviata con successo tramite Resend.' });
+  } catch (err) {
+    console.error('Errore generale:', err);
+    return res.status(500).json({ message: 'Errore imprevisto.' });
   }
 }

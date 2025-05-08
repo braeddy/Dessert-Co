@@ -44,8 +44,9 @@ const ContactUs: React.FC = () => {
       setTimeout(() => {
         setSubmitted(false);
       }, 5000);
-    } catch (error) {
-      alert(t('contact.errorMessage') || 'Si è verificato un errore nell\'invio del messaggio');
+    } catch (error: any) {
+      const errorMsg = await error?.response?.json?.() || t('contact.errorMessage');
+      alert(errorMsg.message || 'Si è verificato un errore.');
     } finally {
       setIsSubmitting(false);
     }
