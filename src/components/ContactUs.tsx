@@ -14,19 +14,35 @@ const ContactUs: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      console.log('Sending form data:', formData);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Errore nell\'invio del messaggio');
+      }
+
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
       
@@ -34,7 +50,11 @@ const ContactUs: React.FC = () => {
       setTimeout(() => {
         setSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Si è verificato un errore inaspettato');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,6 +77,12 @@ const ContactUs: React.FC = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
+                  {error && (
+                    <div className="bg-red-50 text-red-700 p-4 rounded-md mb-4">
+                      {error}
+                    </div>
+                  )}
+                  
                   <div className="mb-4">
                     <label htmlFor="name" className="block text-bakery-brown mb-2">{t('contact.form.name')}</label>
                     <input
