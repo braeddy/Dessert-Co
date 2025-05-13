@@ -209,12 +209,13 @@ const ContactUs: React.FC = () => {
               
               <div className="mt-8 h-48 bg-gray-200 rounded-md overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46782.92434281598!2d10.47791071891533!3d42.92304379595878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e22e8e6aae37%3A0x5c38c7756dd1055c!2s57025%20Piombino%2C%20Province%20of%20Livorno%2C%20Italy!5e0!3m2!1sen!2sus!4v1699880150000!5m2!1sen!2sus" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.216833888844!2d10.51723107657259!3d42.92396490276466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e3b3dd888889%3A0x68b46300db8747d3!2sVia%20Domenico%20Cimarosa%2C%205%2Fa%2C%2057025%20Piombino%20LI!5e0!3m2!1sit!2sit!4v1715644626395!5m2!1sit!2sit" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
                   allowFullScreen 
                   loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
             </div>
