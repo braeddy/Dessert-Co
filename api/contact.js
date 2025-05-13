@@ -73,12 +73,12 @@ export default async function handler(req, res) {
     // Invio email tramite Resend
     try {
       const emailResponse = await resend.emails.send({
-        from: 'Modulo Contatti <onboarding@resend.dev>',
+        from: 'Richiesta Contatto <onboarding@resend.dev>',
         to: EMAIL_TO,
         reply_to: email, // L'utente può rispondere direttamente alla persona che ha compilato il modulo
-        subject: `Nuovo messaggio da ${name}`,
+        subject: `Nuova richiesta da ${name}`,
         html: `
-          <h2>Nuovo messaggio dal modulo di contatto</h2>
+          <h2>Nuova richiesta di contatto dal sito</h2>
           <p><strong>Nome:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Telefono:</strong> ${phone || 'Non fornito'}</p>
