@@ -1,5 +1,6 @@
 import React from 'react';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './LogoBG';
 import { useTranslation } from 'react-i18next';
 
@@ -40,14 +41,14 @@ const Footer: React.FC = () => {
           
           <ul className="flex space-x-6 mt-4 md:mt-0">
             <li>
-              <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+              <Link to="/privacy-policy" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('footer.privacyPolicy')}
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
+              <Link to="/terms-of-service" className="text-sm text-gray-300 hover:text-white transition-colors">
                 {t('footer.termsOfService')}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -3,6 +3,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import LogoM from './LogoM';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   scrolled: boolean;
@@ -65,6 +66,10 @@ const LanguageSwitcher: React.FC = () => {
 const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  
+  // Verifica se ci troviamo in una pagina secondaria (non nella home)
+  const isSecondaryPage = location.pathname !== '/';
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
@@ -86,12 +91,12 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         <div className="flex-shrink-0">
           {/* Logo per la versione desktop */}
           <div className="hidden md:block">
-            <Logo size={scrolled ? 'small' : 'large'} />
+            <Logo size={scrolled ? 'small' : 'large'} isSecondaryPage={isSecondaryPage} />
           </div>
 
           {/* LogoM per la versione mobile */}
           <div className="block md:hidden">
-            <LogoM size={scrolled ? 'small' : 'large'} />
+            <LogoM size={scrolled ? 'small' : 'large'} isSecondaryPage={isSecondaryPage} />
           </div>
         </div>
 
