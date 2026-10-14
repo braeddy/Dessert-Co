@@ -6,15 +6,11 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ size }) => {
   return (
-    <div className={`flex items-center ${size === 'small' ? 'h-32' : 'h-40'}`}>
-      <div className="relative">
-        <img 
-          src="/logobg.png" 
-          alt="Dessert&Co Logo" 
-          className={`${size === 'small' ? 'h-28' : 'h-36'} object-contain transition-all duration-300`}
-        />
-      </div>
-    </div>
+    <img
+      src="/logobg.png"
+      alt="Dessert&Co Logo"
+      className={`${size === 'small' ? 'h-24 w-24' : 'h-36 w-36'} rounded-full object-contain`}
+    />
   );
 };
 

@@ -5,10 +5,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
-  
+
   body {
-    @apply bg-white text-bakery-brown;
+    @apply bg-bakery-ivory text-bakery-brown antialiased;
+  }
+
+  ::selection {
+    @apply bg-bakery-pink text-bakery-cocoa;
   }
 }
 
@@ -16,9 +21,64 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
+
+  /* Etichetta sopra i titoli di sezione */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-bakery-rose;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-bakery-rose;
+  }
+
+  .section-title {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.05] tracking-tight text-bakery-cocoa;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-bakery-cocoa px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-bakery-rose hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose focus-visible:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-bakery-brown/25 px-7 py-3.5 text-sm font-semibold text-bakery-cocoa transition-all duration-300 hover:-translate-y-0.5 hover:border-bakery-cocoa hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose focus-visible:ring-offset-2;
+  }
+
+  /* Effetto "grana" leggera per gli sfondi */
+  .bg-grain {
+    background-image: radial-gradient(rgba(74, 52, 38, 0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* Animazione di comparsa allo scroll (vedi useReveal) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float,
+  .animate-marquee,
+  .animate-spin-slow {
+    animation: none;
+  }
 }

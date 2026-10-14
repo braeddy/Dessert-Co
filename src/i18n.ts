@@ -5,6 +5,17 @@ const resources = {
   en: {
     translation: {
       hero: {
+        eyebrow: "Cake design · Piombino",
+        line1: "Cakes that",
+        accent: "tell the story",
+        line2: "of your moments",
+        badge: "since 2012",
+        scroll: "Scroll",
+        stat1Label: "years of passion",
+        stat2Value: "100%",
+        stat2Label: "handmade",
+        stat3Value: "Bespoke",
+        stat3Label: "for every event",
         title: "Dessert&Co",
         subtitle: "For special moments",
         description: "Dessert&Co creates beautiful, custom-designed cakes that taste as amazing as they look. Based in Piombino, we bring your sweetest dreams to life.",
@@ -12,6 +23,10 @@ const resources = {
         contact: "Contact Us",
       },
       about: {
+        eyebrow: "Our story",
+        quote: "Every cake is a memory you can taste.",
+        signature: "Roberta Rosetti",
+        yearsLabel: "years in Piombino",
         title: "About Dessert&Co",
         imageAlt: "Cake maker decorating a beautiful cake",
         storyTitle: "Our Sweet Story",
@@ -33,6 +48,10 @@ const resources = {
         },
       },
       contact: {
+        eyebrow: "Contact",
+        directions: "Get directions",
+        privacyNote: "By submitting this form you accept our",
+        privacyLink: "privacy policy",
         title: "Contact Us",
         description: "We'd love to hear from you! Please fill out the form below or contact us directly.",
         formTitle: "Get in Touch",
@@ -45,6 +64,7 @@ const resources = {
           sending: "Sending...",
         },
         successMessage: "Thank you for your message! We'll get back to you soon.",
+        errorMessage: "We couldn't send your message. Please try again or contact us by phone or email.",
         visitTitle: "Visit Us",
         addressTitle: "Address",
         address: "Via Domenico Cimarosa 5/a, Piombino 57025, Province of Livorno, Italy",
@@ -63,16 +83,76 @@ const resources = {
         },
       },
       gallery: {
+        eyebrow: "Portfolio",
+        close: "Close",
+        prev: "Previous image",
+        next: "Next image",
+        instagram: "See more creations on Instagram",
+        open: "Open image",
         title: "Our Creations",
         description: "Explore our gallery of custom cakes and desserts, each crafted with love and precision to make your celebrations unforgettable.",
       },
+      services: {
+        eyebrow: "What we create",
+        title: "A cake for every occasion",
+        description: "From show-stopping wedding cakes to the most indulgent birthday treats: every creation is made just for you.",
+        items: {
+          weddings: {
+            title: "Weddings",
+            description: "Elegant wedding cakes, coordinated with the flowers, setting and style of your day.",
+          },
+          birthdays: {
+            title: "Birthdays",
+            description: "Themed cakes for kids and grown-ups, hand-decorated and personalised in every detail.",
+          },
+          events: {
+            title: "Events & celebrations",
+            description: "Christenings, communions, graduations and anniversaries: sweets made to celebrate together.",
+          },
+          sweets: {
+            title: "Cupcakes & treats",
+            description: "Cupcakes, petits fours and little delights to pair with your cake for a complete dessert table.",
+          },
+        },
+      },
+      process: {
+        eyebrow: "How it works",
+        title: "From your idea to your cake",
+        steps: {
+          one: {
+            title: "Tell us your idea",
+            description: "Write or call us: date, number of guests, style and favourite flavours.",
+          },
+          two: {
+            title: "We design it together",
+            description: "We define design, flavours and decorations for a cake that feels like you.",
+          },
+          three: {
+            title: "The big day",
+            description: "We handcraft your cake with fresh ingredients, ready to amaze your guests.",
+          },
+        },
+        note: "For weddings and major events we recommend getting in touch well in advance.",
+      },
+      cta: {
+        title: "Got a special occasion coming up?",
+        description: "Tell us what you dream of: together we'll create the perfect cake.",
+        button: "Request a quote",
+        call: "Call us",
+      },
+      marquee: ["Wedding cakes", "Birthdays", "Christenings", "Communions", "Anniversaries", "Cupcakes", "Events"],
       header: {
+        cta: "Get a quote",
+        services: "Services",
         home: "Home",
         about: "About Us",
         gallery: "Gallery",
         contact: "Contact",
       },
       footer: {
+        navTitle: "Explore",
+        contactTitle: "Contact",
+        backToTop: "Back to top",
         description: "Dessert&Co creates beautiful, custom-designed cakes for all your special occasions.",
         followUs: "Follow Us",
         copyright: "Dessert&Co di Roberta Rosetti. All rights reserved.",
@@ -226,6 +306,17 @@ const resources = {
   it: {
     translation: {
       hero: {
+        eyebrow: "Cake design · Piombino",
+        line1: "Torte che",
+        accent: "raccontano",
+        line2: "i tuoi momenti",
+        badge: "dal 2012",
+        scroll: "Scorri",
+        stat1Label: "anni di passione",
+        stat2Value: "100%",
+        stat2Label: "fatto a mano",
+        stat3Value: "Su misura",
+        stat3Label: "per ogni evento",
         title: "Dessert&Co",
         subtitle: "Per i momenti speciali",
         description: "Dessert&Co crea torte bellissime e personalizzate che hanno un sapore incredibile. Con sede a Piombino, trasformiamo i tuoi sogni più dolci in realtà.",
@@ -233,6 +324,10 @@ const resources = {
         contact: "Contattaci",
       },
       about: {
+        eyebrow: "La nostra storia",
+        quote: "Ogni torta è un ricordo che si può assaggiare.",
+        signature: "Roberta Rosetti",
+        yearsLabel: "anni a Piombino",
         title: "Chi siamo",
         imageAlt: "Pasticcere che decora una torta bellissima",
         storyTitle: "La nostra dolce storia",
@@ -254,6 +349,10 @@ const resources = {
         },
       },
       contact: {
+        eyebrow: "Contatti",
+        directions: "Indicazioni stradali",
+        privacyNote: "Inviando il modulo accetti la nostra",
+        privacyLink: "informativa sulla privacy",
         title: "Contattaci",
         description: "Ci piacerebbe sentirti! Compila il modulo qui sotto o contattaci direttamente.",
         formTitle: "Mettiti in contatto",
@@ -266,6 +365,7 @@ const resources = {
           sending: "Invio in corso...",
         },
         successMessage: "Grazie per il tuo messaggio! Ti risponderemo al più presto.",
+        errorMessage: "Non siamo riusciti a inviare il messaggio. Riprova oppure contattaci per telefono o email.",
         visitTitle: "Vieni a trovarci",
         addressTitle: "Indirizzo",
         address: "Via Domenico Cimarosa 5/a, Piombino 57025, Provincia di Livorno, Italia",
@@ -284,16 +384,76 @@ const resources = {
         },
       },
       gallery: {
+        eyebrow: "Portfolio",
+        close: "Chiudi",
+        prev: "Immagine precedente",
+        next: "Immagine successiva",
+        instagram: "Scopri altre creazioni su Instagram",
+        open: "Apri immagine",
         title: "Le nostre creazioni",
         description: "Esplora la nostra galleria di torte e dessert personalizzati, ognuno realizzato con amore e precisione per rendere indimenticabili le tue celebrazioni.",
       },
+      services: {
+        eyebrow: "Cosa realizziamo",
+        title: "Una torta per ogni occasione",
+        description: "Dalle wedding cake scenografiche alle torte di compleanno più golose: ogni creazione nasce su misura per te.",
+        items: {
+          weddings: {
+            title: "Matrimoni",
+            description: "Wedding cake eleganti, coordinate con fiori, allestimento e stile del vostro giorno.",
+          },
+          birthdays: {
+            title: "Compleanni",
+            description: "Torte a tema per grandi e piccini, decorate a mano e personalizzate in ogni dettaglio.",
+          },
+          events: {
+            title: "Eventi e ricorrenze",
+            description: "Battesimi, comunioni, lauree e anniversari: dolci pensati per celebrare insieme.",
+          },
+          sweets: {
+            title: "Cupcake e dolcetti",
+            description: "Cupcake, mignon e piccole delizie da abbinare alla torta per un buffet completo.",
+          },
+        },
+      },
+      process: {
+        eyebrow: "Come funziona",
+        title: "Dalla tua idea alla tua torta",
+        steps: {
+          one: {
+            title: "Raccontaci la tua idea",
+            description: "Scrivici o chiamaci: data, numero di invitati, stile e gusti preferiti.",
+          },
+          two: {
+            title: "Progettiamo insieme",
+            description: "Definiamo design, sapori e decorazioni per una torta che ti somigli.",
+          },
+          three: {
+            title: "Il grande giorno",
+            description: "Realizziamo la tua torta a mano, con ingredienti freschi, pronta a stupire i tuoi ospiti.",
+          },
+        },
+        note: "Per matrimoni ed eventi importanti ti consigliamo di contattarci con anticipo.",
+      },
+      cta: {
+        title: "Hai un'occasione speciale in arrivo?",
+        description: "Raccontaci cosa sogni: insieme creeremo la torta perfetta.",
+        button: "Richiedi un preventivo",
+        call: "Chiamaci",
+      },
+      marquee: ["Wedding cake", "Compleanni", "Battesimi", "Comunioni", "Anniversari", "Cupcake", "Eventi"],
       header: {
+        cta: "Richiedi preventivo",
+        services: "Servizi",
         home: "Home",
         about: "Chi siamo",
         gallery: "Galleria",
         contact: "Contatti",
       },
       footer: {
+        navTitle: "Esplora",
+        contactTitle: "Contatti",
+        backToTop: "Torna su",
         description: "Dessert&Co crea torte bellissime e personalizzate per tutte le tue occasioni speciali.",
         followUs: "Seguici",
         copyright: "Dessert&Co di Roberta Rosetti. Tutti i diritti riservati.",
@@ -447,6 +607,17 @@ const resources = {
   de: {
     translation: {
       hero: {
+        eyebrow: "Cake Design · Piombino",
+        line1: "Torten, die",
+        accent: "Ihre Momente",
+        line2: "erzählen",
+        badge: "seit 2012",
+        scroll: "Scrollen",
+        stat1Label: "Jahre Leidenschaft",
+        stat2Value: "100%",
+        stat2Label: "handgemacht",
+        stat3Value: "Maßgefertigt",
+        stat3Label: "für jeden Anlass",
         title: "Dessert&Co",
         subtitle: "Für besondere Momente",
         description: "Dessert&Co kreiert wunderschöne, maßgeschneiderte Kuchen, die genauso gut schmecken, wie sie aussehen. Mit Sitz in Piombino verwirklichen wir Ihre süßesten Träume.",
@@ -454,6 +625,10 @@ const resources = {
         contact: "Kontaktieren Sie uns",
       },
       about: {
+        eyebrow: "Unsere Geschichte",
+        quote: "Jede Torte ist eine Erinnerung, die man schmecken kann.",
+        signature: "Roberta Rosetti",
+        yearsLabel: "Jahre in Piombino",
         title: "Über Dessert&Co",
         imageAlt: "Konditor dekoriert einen wunderschönen Kuchen",
         storyTitle: "Unsere süße Geschichte",
@@ -475,6 +650,10 @@ const resources = {
         },
       },
       contact: {
+        eyebrow: "Kontakt",
+        directions: "Route planen",
+        privacyNote: "Mit dem Absenden des Formulars akzeptieren Sie unsere",
+        privacyLink: "Datenschutzrichtlinie",
         title: "Kontaktieren Sie uns",
         description: "Wir würden uns freuen, von Ihnen zu hören! Bitte füllen Sie das untenstehende Formular aus oder kontaktieren Sie uns direkt.",
         formTitle: "Kontakt aufnehmen",
@@ -487,6 +666,7 @@ const resources = {
           sending: "Senden...",
         },
         successMessage: "Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.",
+        errorMessage: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch oder per E-Mail.",
         visitTitle: "Besuchen Sie uns",
         addressTitle: "Adresse",
         address: "Via Domenico Cimarosa 5/a, Piombino 57025, Provinz Livorno, Italien",
@@ -505,16 +685,76 @@ const resources = {
         },
       },
       gallery: {
+        eyebrow: "Portfolio",
+        close: "Schließen",
+        prev: "Vorheriges Bild",
+        next: "Nächstes Bild",
+        instagram: "Weitere Kreationen auf Instagram",
+        open: "Bild öffnen",
         title: "Unsere Kreationen",
         description: "Entdecken Sie unsere Galerie maßgeschneiderter Kuchen und Desserts, die mit Liebe und Präzision gefertigt wurden, um Ihre Feiern unvergesslich zu machen.",
       },
+      services: {
+        eyebrow: "Was wir kreieren",
+        title: "Eine Torte für jeden Anlass",
+        description: "Von spektakulären Hochzeitstorten bis zu köstlichen Geburtstagstorten: Jede Kreation entsteht ganz nach Ihren Wünschen.",
+        items: {
+          weddings: {
+            title: "Hochzeiten",
+            description: "Elegante Hochzeitstorten, abgestimmt auf Blumen, Dekoration und Stil Ihres Tages.",
+          },
+          birthdays: {
+            title: "Geburtstage",
+            description: "Motivtorten für Groß und Klein, von Hand dekoriert und in jedem Detail personalisiert.",
+          },
+          events: {
+            title: "Feste & Jubiläen",
+            description: "Taufen, Kommunionen, Abschlüsse und Jubiläen: Süßes, um gemeinsam zu feiern.",
+          },
+          sweets: {
+            title: "Cupcakes & Naschereien",
+            description: "Cupcakes, Petits Fours und kleine Köstlichkeiten passend zur Torte für ein komplettes Dessertbuffet.",
+          },
+        },
+      },
+      process: {
+        eyebrow: "So funktioniert's",
+        title: "Von Ihrer Idee zu Ihrer Torte",
+        steps: {
+          one: {
+            title: "Erzählen Sie uns Ihre Idee",
+            description: "Schreiben oder rufen Sie uns an: Datum, Gästezahl, Stil und Lieblingsgeschmack.",
+          },
+          two: {
+            title: "Gemeinsam gestalten",
+            description: "Wir legen Design, Geschmack und Dekoration fest – für eine Torte, die zu Ihnen passt.",
+          },
+          three: {
+            title: "Der große Tag",
+            description: "Wir fertigen Ihre Torte von Hand mit frischen Zutaten, bereit, Ihre Gäste zu begeistern.",
+          },
+        },
+        note: "Für Hochzeiten und große Feiern empfehlen wir, uns frühzeitig zu kontaktieren.",
+      },
+      cta: {
+        title: "Steht ein besonderer Anlass bevor?",
+        description: "Erzählen Sie uns von Ihren Wünschen: Gemeinsam kreieren wir die perfekte Torte.",
+        button: "Angebot anfragen",
+        call: "Rufen Sie uns an",
+      },
+      marquee: ["Hochzeitstorten", "Geburtstage", "Taufen", "Kommunionen", "Jubiläen", "Cupcakes", "Events"],
       header: {
+        cta: "Angebot anfragen",
+        services: "Leistungen",
         home: "Startseite",
         about: "Über uns",
         gallery: "Galerie",
         contact: "Kontakt",
       },
       footer: {
+        navTitle: "Entdecken",
+        contactTitle: "Kontakt",
+        backToTop: "Nach oben",
         description: "Dessert&Co kreiert wunderschöne, maßgeschneiderte Kuchen für all Ihre besonderen Anlässe.",
         followUs: "Folgen Sie uns",
         copyright: "Dessert&Co von Roberta Rosetti. Alle Rechte vorbehalten.",

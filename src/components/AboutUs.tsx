@@ -1,60 +1,74 @@
 import React from 'react';
-import { Heart, Award, Clock } from 'lucide-react';
+import { Heart, Award, Palette, Quote } from 'lucide-react';
 import Section from '../layout/Section';
+import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
+import { foundedYear } from '../constants';
 
 const AboutUs: React.FC = () => {
   const { t } = useTranslation();
+  const years = new Date().getFullYear() - foundedYear;
+
+  const features = [
+    { key: 'love', icon: Heart, color: 'bg-bakery-pink' },
+    { key: 'quality', icon: Award, color: 'bg-bakery-blue/60' },
+    { key: 'custom', icon: Palette, color: 'bg-bakery-cream' },
+  ];
 
   return (
-    <Section id="about" className="bg-bakery-cream bg-opacity-30 py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-bakery-brown">{t('about.title')}</h2>
-          <div className="w-24 h-1 bg-bakery-pink mx-auto"></div>
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-12 items-center">
-          <div className="md:w-1/2">
-            <div className="relative">
-              <img 
-                src="/aboutus-image-2.jpg" 
-                alt={t('about.imageAlt')} 
-                className="rounded-lg shadow-xl"
+    <Section id="about" className="relative py-24 md:py-32">
+      <div className="container mx-auto">
+        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
+          {/* Immagine */}
+          <Reveal className="relative order-2 lg:order-1">
+            <div className="relative overflow-hidden rounded-[2.5rem] shadow-soft">
+              <img
+                src="/aboutus-image-2.jpg"
+                alt={t('about.imageAlt')}
+                className="aspect-[4/5] w-full object-cover object-[70%_center] sm:aspect-[5/4] lg:aspect-[4/5]"
+                loading="lazy"
               />
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-bakery-blue rounded-lg transform rotate-6 -z-10 opacity-30"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-bakery-cocoa/70 via-bakery-cocoa/0 to-transparent" />
+              <figure className="absolute inset-x-6 bottom-6 text-white md:inset-x-10 md:bottom-10">
+                <Quote size={28} className="mb-3 text-bakery-pink" />
+                <blockquote className="font-serif text-2xl font-light italic leading-snug md:text-3xl">
+                  {t('about.quote')}
+                </blockquote>
+                <figcaption className="mt-3 font-script text-3xl text-bakery-pink">{t('about.signature')}</figcaption>
+              </figure>
             </div>
-          </div>
 
-          <div className="md:w-1/2">
-            <h3 className="font-serif text-2xl font-semibold mb-4 text-bakery-brown">{t('about.storyTitle')}</h3>
-            <p className="mb-4">{t('about.storyParagraph1')}</p>
-            <p className="mb-6">{t('about.storyParagraph2')}</p>
+            <div className="absolute -right-4 -top-6 rounded-3xl bg-white px-6 py-5 text-center shadow-soft md:-right-8">
+              <p className="font-serif text-5xl font-medium text-bakery-rose">{years}</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-bakery-brown/70">{t('about.yearsLabel')}</p>
+            </div>
+          </Reveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-              <div className="bg-white p-4 rounded-lg shadow-md text-center">
-                <div className="w-12 h-12 bg-bakery-pink bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Heart className="text-bakery-brown" size={24} />
-                </div>
-                <h4 className="font-serif font-semibold mb-1">{t('about.features.love.title')}</h4>
-                <p className="text-sm">{t('about.features.love.description')}</p>
-              </div>
+          {/* Testo */}
+          <div className="order-1 lg:order-2">
+            <Reveal>
+              <span className="eyebrow">{t('about.eyebrow')}</span>
+              <h2 className="section-title mt-5">{t('about.storyTitle')}</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="mt-8 text-lg leading-relaxed text-bakery-brown/85">{t('about.storyParagraph1')}</p>
+              <p className="mt-5 leading-relaxed text-bakery-brown/75">{t('about.storyParagraph2')}</p>
+            </Reveal>
 
-              <div className="bg-white p-4 rounded-lg shadow-md text-center">
-                <div className="w-12 h-12 bg-bakery-blue bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Award className="text-bakery-brown" size={24} />
-                </div>
-                <h4 className="font-serif font-semibold mb-1">{t('about.features.quality.title')}</h4>
-                <p className="text-sm">{t('about.features.quality.description')}</p>
-              </div>
-
-              <div className="bg-white p-4 rounded-lg shadow-md text-center">
-                <div className="w-12 h-12 bg-bakery-cream bg-opacity-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Clock className="text-bakery-brown" size={24} />
-                </div>
-                <h4 className="font-serif font-semibold mb-1">{t('about.features.custom.title')}</h4>
-                <p className="text-sm">{t('about.features.custom.description')}</p>
-              </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              {features.map(({ key, icon: Icon, color }, index) => (
+                <Reveal
+                  key={key}
+                  delay={150 + index * 100}
+                  className="group rounded-3xl border border-bakery-brown/10 bg-white/70 p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
+                >
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-2xl ${color} transition-transform duration-500 group-hover:rotate-6`}>
+                    <Icon className="text-bakery-cocoa" size={20} />
+                  </div>
+                  <h3 className="font-serif text-lg font-medium text-bakery-cocoa">{t(`about.features.${key}.title`)}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-bakery-brown/70">{t(`about.features.${key}.description`)}</p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>

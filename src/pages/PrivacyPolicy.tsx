@@ -6,9 +6,9 @@ const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Section id="privacy-policy" className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <h1 className="font-serif text-3xl md:text-4xl font-bold mb-8 text-bakery-brown">{t('privacy.title', 'Informativa sulla Privacy')}</h1>
+    <Section id="privacy-policy" className="pb-16 pt-32 md:pb-24 md:pt-40">
+      <div className="mx-auto max-w-3xl rounded-[2rem] bg-white p-6 shadow-soft md:p-12">
+        <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-8 text-bakery-cocoa">{t('privacy.title', 'Informativa sulla Privacy')}</h1>
         <div className="prose prose-lg max-w-none text-gray-700">
           <p className="mb-6">{t('privacy.lastUpdated', 'Ultimo aggiornamento: 18 maggio 2024')}</p>
           

@@ -32,7 +32,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="font-sans text-bakery-brown bg-white">
+    <div className="min-h-screen overflow-x-clip bg-bakery-ivory font-sans text-bakery-brown">
       <Header scrolled={scrolled} />
       <main>
         <Routes>

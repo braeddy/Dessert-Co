@@ -1,54 +1,95 @@
 import React from 'react';
-import { Instagram, Facebook } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Instagram, Facebook, ArrowUp } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './LogoBG';
 import { useTranslation } from 'react-i18next';
+import { contactInfo, navSections } from '../constants';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
-  
+
+  const goTo = (id: string) => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: id } });
+      return;
+    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const socialClass =
+    'flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-bakery-rose hover:bg-bakery-rose';
+
   return (
-    <footer className="bg-bakery-brown text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <div className="mb-6 md:mb-0">
-            <div className="flex justify-center md:justify-start">
-              <Logo size="small" />
+    <footer className="relative overflow-hidden bg-bakery-cocoa text-white">
+      <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-bakery-rose/20 blur-3xl" />
+
+      <div className="container relative mx-auto px-4 pb-10 pt-20">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <Logo size="small" />
+            <p className="mt-6 max-w-sm leading-relaxed text-white/65">{t('footer.description')}</p>
+            <div className="mt-8 flex gap-3">
+              <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={socialClass}>
+                <Instagram size={18} />
+              </a>
+              <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={socialClass}>
+                <Facebook size={18} />
+              </a>
             </div>
-            <p className="text-gray-300 mt-4 text-center md:text-left max-w-xs">
-              {t('footer.description')}
-            </p>
           </div>
-          
-          <div className="flex flex-col items-center md:items-end">
-            <h4 className="font-serif text-xl mb-4">{t('footer.followUs')}</h4>
-            <div className="flex space-x-4">
-              <a href="https://www.instagram.com/robertadessert?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target='_blank' className="text-white hover:text-bakery-blue transition-colors">
-                <Instagram size={24} />
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=100060329632132" target='_blank' className="text-white hover:text-bakery-blue transition-colors">
-                <Facebook size={24} />
-              </a>
-            </div>
+
+          <div className="md:col-span-3">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-bakery-pink">{t('footer.navTitle')}</h4>
+            <ul className="mt-6 space-y-3">
+              {navSections.map((id) => (
+                <li key={id}>
+                  <button onClick={() => goTo(id)} className="text-white/75 transition-colors hover:text-white">
+                    {t(`header.${id}`)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-4">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-bakery-pink">{t('footer.contactTitle')}</h4>
+            <ul className="mt-6 space-y-3 text-white/75">
+              <li>{t('contact.address')}</li>
+              <li>
+                <a href={contactInfo.phoneHref} className="transition-colors hover:text-white">{t('contact.phone')}</a>
+              </li>
+              <li>
+                <a href={contactInfo.emailHref} className="transition-colors hover:text-white">{t('contact.email')}</a>
+              </li>
+            </ul>
           </div>
         </div>
-        
-        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-300">
-            &copy; {currentYear} {t('footer.copyright')}
-          </p>
-          
-          <ul className="flex space-x-6 mt-4 md:mt-0">
+
+        <p className="pointer-events-none mt-16 select-none text-center font-serif text-[18vw] font-medium leading-none tracking-tight text-white/[0.04] md:text-[12rem]" aria-hidden="true">
+          Dessert&amp;Co
+        </p>
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/55 md:flex-row">
+          <p>&copy; {currentYear} {t('footer.copyright')}</p>
+
+          <ul className="flex flex-wrap items-center justify-center gap-6">
             <li>
-              <Link to="/privacy-policy" className="text-sm text-gray-300 hover:text-white transition-colors">
-                {t('footer.privacyPolicy')}
-              </Link>
+              <Link to="/privacy-policy" className="transition-colors hover:text-white">{t('footer.privacyPolicy')}</Link>
             </li>
             <li>
-              <Link to="/terms-of-service" className="text-sm text-gray-300 hover:text-white transition-colors">
-                {t('footer.termsOfService')}
-              </Link>
+              <Link to="/terms-of-service" className="transition-colors hover:text-white">{t('footer.termsOfService')}</Link>
+            </li>
+            <li>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="flex items-center gap-2 transition-colors hover:text-white"
+              >
+                {t('footer.backToTop')}
+                <ArrowUp size={14} />
+              </button>
             </li>
           </ul>
         </div>

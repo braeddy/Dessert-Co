@@ -2,29 +2,15 @@ import React from 'react';
 
 interface LogoProps {
   size: 'small' | 'large';
-  isSecondaryPage?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size, isSecondaryPage = false }) => {
-  // Se è una pagina secondaria, riduciamo ulteriormente le dimensioni
-  const finalHeight = isSecondaryPage 
-    ? (size === 'small' ? 'h-24' : 'h-28') // Più piccolo per pagine secondarie
-    : (size === 'small' ? 'h-32' : 'h-40'); // Dimensioni originali per home page
-
-  const imgHeight = isSecondaryPage 
-    ? (size === 'small' ? 'h-20' : 'h-24') // Immagine più piccola per pagine secondarie
-    : (size === 'small' ? 'h-28' : 'h-36'); // Dimensioni originali per home page
-
+const Logo: React.FC<LogoProps> = ({ size }) => {
   return (
-    <div className={`flex items-center ${finalHeight}`}>
-      <div className="relative">
-        <img 
-          src="/logo.png" 
-          alt="Dessert&Co Logo" 
-          className={`${imgHeight} object-contain transition-all duration-300`}
-        />
-      </div>
-    </div>
+    <img
+      src="/logo.png"
+      alt="Dessert&Co Logo"
+      className={`${size === 'small' ? 'h-11 w-11' : 'h-16 w-16 md:h-20 md:w-20'} rounded-full bg-white object-contain shadow-sm ring-1 ring-bakery-brown/5 transition-all duration-500`}
+    />
   );
 };
 

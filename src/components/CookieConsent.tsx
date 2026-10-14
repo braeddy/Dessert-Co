@@ -38,36 +38,36 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ className = '' }) => {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-        <div className="p-6">
-          <h3 className="font-serif text-xl font-semibold text-bakery-brown mb-3">
+    <div className="fixed inset-x-0 bottom-0 z-[55] animate-fade-in px-4 pb-4">
+      <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-bakery-brown/10 bg-white/95 shadow-soft backdrop-blur-xl">
+        <div className="p-6 md:p-8">
+          <h3 className="mb-3 font-serif text-2xl font-medium text-bakery-cocoa">
             {t('cookies.title', 'Informativa sui Cookie')}
           </h3>
           
-          <p className="text-gray-700 mb-4">
+          <p className="mb-6 text-sm leading-relaxed text-bakery-brown/75">
             {t('cookies.description', 
               'Questo sito utilizza cookie tecnici necessari al funzionamento e cookie analitici per migliorare la tua esperienza. Puoi accettare tutti i cookie o solo quelli essenziali per la navigazione.')}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 justify-end">
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
             <button
               onClick={acceptEssential}
-              className="px-4 py-2 text-bakery-brown border border-bakery-brown rounded-md hover:bg-bakery-cream hover:bg-opacity-20 transition-colors"
+              className="btn-ghost !py-2.5"
             >
               {t('cookies.acceptEssential', 'Solo cookie essenziali')}
             </button>
             
             <button
               onClick={acceptAll}
-              className="px-4 py-2 bg-bakery-brown text-white rounded-md hover:bg-opacity-90 transition-colors"
+              className="btn-primary !py-2.5"
             >
               {t('cookies.acceptAll', 'Accetta tutti i cookie')}
             </button>
             
             <Link
               to="/privacy-policy"
-              className="px-4 py-2 text-bakery-blue hover:underline flex items-center justify-center"
+              className="order-first flex items-center justify-center px-2 py-2 text-sm text-bakery-brown/70 underline decoration-bakery-rose underline-offset-2 hover:text-bakery-rose sm:mr-auto"
             >
               {t('cookies.privacyPolicy', 'Privacy Policy')}
             </Link>
