@@ -95,23 +95,25 @@ const resources = {
       services: {
         eyebrow: "What we create",
         title: "A cake for every occasion",
-        description: "From show-stopping wedding cakes to the most indulgent birthday treats: every creation is made just for you.",
+        description: "From show-stopping wedding cakes to the most indulgent birthday cakes: every creation is made just for you.",
+        more: "Learn more",
+        cta: "Request a quote",
+        close: "Close",
         items: {
           weddings: {
             title: "Weddings",
             description: "Elegant wedding cakes, coordinated with the flowers, setting and style of your day.",
+            details: "We design your wedding cake together, starting with a private tasting where you choose the flavours. Shape, tiers and decorations are then defined around your guest count and the style of the celebration. On the day, we deliver the cake directly to your venue.",
           },
           birthdays: {
             title: "Birthdays",
             description: "Themed cakes for kids and grown-ups, hand-decorated and personalised in every detail.",
+            details: "From a favourite character to a refined design for a milestone birthday, every cake starts from your ideas. You choose flavours, fillings and decorations; size and portions are tailored to the number of guests.",
           },
           events: {
             title: "Events & celebrations",
-            description: "Christenings, communions, graduations and anniversaries: sweets made to celebrate together.",
-          },
-          sweets: {
-            title: "Cupcakes & treats",
-            description: "Cupcakes, petits fours and little delights to pair with your cake for a complete dessert table.",
+            description: "Christenings, communions, graduations and anniversaries: cakes made to celebrate together.",
+            details: "For christenings, communions, confirmations, graduations and anniversaries we create cakes that match the theme and colours of your celebration. Each project is made to measure, planned around the date and size of your event.",
           },
         },
       },
@@ -140,7 +142,7 @@ const resources = {
         button: "Request a quote",
         call: "Call us",
       },
-      marquee: ["Wedding cakes", "Birthdays", "Christenings", "Communions", "Anniversaries", "Cupcakes", "Events"],
+      marquee: ["Wedding cakes", "Birthdays", "Christenings", "Communions", "Anniversaries", "Graduations", "Events"],
       header: {
         cta: "Get a quote",
         services: "Services",
@@ -397,22 +399,24 @@ const resources = {
         eyebrow: "Cosa realizziamo",
         title: "Una torta per ogni occasione",
         description: "Dalle wedding cake scenografiche alle torte di compleanno più golose: ogni creazione nasce su misura per te.",
+        more: "Scopri di più",
+        cta: "Richiedi un preventivo",
+        close: "Chiudi",
         items: {
           weddings: {
             title: "Matrimoni",
             description: "Wedding cake eleganti, coordinate con fiori, allestimento e stile del vostro giorno.",
+            details: "Progettiamo insieme la vostra wedding cake, a partire da una degustazione riservata agli sposi per scegliere i gusti. Forma, piani e decorazioni vengono poi definiti in base al numero di ospiti e allo stile della cerimonia. Il giorno del matrimonio consegniamo la torta direttamente in location.",
           },
           birthdays: {
             title: "Compleanni",
             description: "Torte a tema per grandi e piccini, decorate a mano e personalizzate in ogni dettaglio.",
+            details: "Dal personaggio preferito a un design raffinato per un compleanno importante, ogni torta nasce dalle vostre idee. Scegliete gusti, farciture e decorazioni: dimensioni e porzioni sono calibrate sul numero di invitati.",
           },
           events: {
             title: "Eventi e ricorrenze",
-            description: "Battesimi, comunioni, lauree e anniversari: dolci pensati per celebrare insieme.",
-          },
-          sweets: {
-            title: "Cupcake e dolcetti",
-            description: "Cupcake, mignon e piccole delizie da abbinare alla torta per un buffet completo.",
+            description: "Battesimi, comunioni, lauree e anniversari: torte pensate per celebrare insieme.",
+            details: "Per battesimi, comunioni, cresime, lauree e anniversari realizziamo torte coordinate con il tema e i colori della festa. Ogni progetto è studiato su misura, in base alla data e al numero di ospiti dell'evento.",
           },
         },
       },
@@ -441,7 +445,7 @@ const resources = {
         button: "Richiedi un preventivo",
         call: "Chiamaci",
       },
-      marquee: ["Wedding cake", "Compleanni", "Battesimi", "Comunioni", "Anniversari", "Cupcake", "Eventi"],
+      marquee: ["Wedding cake", "Compleanni", "Battesimi", "Comunioni", "Anniversari", "Lauree", "Eventi"],
       header: {
         cta: "Richiedi preventivo",
         services: "Servizi",
@@ -698,22 +702,24 @@ const resources = {
         eyebrow: "Was wir kreieren",
         title: "Eine Torte für jeden Anlass",
         description: "Von spektakulären Hochzeitstorten bis zu köstlichen Geburtstagstorten: Jede Kreation entsteht ganz nach Ihren Wünschen.",
+        more: "Mehr erfahren",
+        cta: "Angebot anfragen",
+        close: "Schließen",
         items: {
           weddings: {
             title: "Hochzeiten",
             description: "Elegante Hochzeitstorten, abgestimmt auf Blumen, Dekoration und Stil Ihres Tages.",
+            details: "Wir entwerfen Ihre Hochzeitstorte gemeinsam, beginnend mit einer exklusiven Verkostung, bei der Sie die Geschmacksrichtungen wählen. Form, Etagen und Dekoration richten sich anschließend nach der Gästezahl und dem Stil der Feier. Am Hochzeitstag liefern wir die Torte direkt an Ihre Location.",
           },
           birthdays: {
             title: "Geburtstage",
             description: "Motivtorten für Groß und Klein, von Hand dekoriert und in jedem Detail personalisiert.",
+            details: "Ob Lieblingsfigur oder elegantes Design für einen runden Geburtstag: Jede Torte entsteht aus Ihren Ideen. Sie wählen Geschmack, Füllung und Dekoration; Größe und Portionen werden auf die Gästezahl abgestimmt.",
           },
           events: {
             title: "Feste & Jubiläen",
-            description: "Taufen, Kommunionen, Abschlüsse und Jubiläen: Süßes, um gemeinsam zu feiern.",
-          },
-          sweets: {
-            title: "Cupcakes & Naschereien",
-            description: "Cupcakes, Petits Fours und kleine Köstlichkeiten passend zur Torte für ein komplettes Dessertbuffet.",
+            description: "Taufen, Kommunionen, Abschlüsse und Jubiläen: Torten, um gemeinsam zu feiern.",
+            details: "Für Taufen, Kommunionen, Firmungen, Abschlüsse und Jubiläen gestalten wir Torten passend zu Thema und Farben Ihrer Feier. Jedes Projekt wird individuell geplant, abgestimmt auf Termin und Gästezahl.",
           },
         },
       },
@@ -742,7 +748,7 @@ const resources = {
         button: "Angebot anfragen",
         call: "Rufen Sie uns an",
       },
-      marquee: ["Hochzeitstorten", "Geburtstage", "Taufen", "Kommunionen", "Jubiläen", "Cupcakes", "Events"],
+      marquee: ["Hochzeitstorten", "Geburtstage", "Taufen", "Kommunionen", "Jubiläen", "Abschlüsse", "Events"],
       header: {
         cta: "Angebot anfragen",
         services: "Leistungen",

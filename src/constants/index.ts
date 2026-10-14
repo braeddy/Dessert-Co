@@ -6,6 +6,12 @@ export const galleryImages = [
     alt: "Wedding cake with flower decorations at sunset",
   },
   {
+    url: "/torta-6.jpg",
+    width: 1908,
+    height: 1272,
+    alt: "Tiered wedding cake with pink roses and blue hydrangeas by the pool at night",
+  },
+  {
     url: "/torta-3.jpg",
     width: 1066,
     height: 1600,
@@ -22,6 +28,12 @@ export const galleryImages = [
     width: 1350,
     height: 1800,
     alt: "White wedding cake by the pool with sugar flowers",
+  },
+  {
+    url: "/torta-8.jpg",
+    width: 1350,
+    height: 1800,
+    alt: "Semi-naked wedding cakes with fresh flowers on an illuminated staircase",
   },
   {
     url: "/gallery-2.jpg",
@@ -46,6 +58,12 @@ export const galleryImages = [
     width: 1600,
     height: 1066,
     alt: "Chocolate cake with berries",
+  },
+  {
+    url: "/torta-7.jpg",
+    width: 1600,
+    height: 1066,
+    alt: "Vintage Lambeth-style cake with pink and mint piping",
   },
   {
     url: "/torta-5.jpg",
