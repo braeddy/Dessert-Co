@@ -216,12 +216,12 @@ const ContactUs: React.FC = () => {
             <div className="relative h-64 overflow-hidden rounded-[2rem] shadow-soft">
               <iframe
                 title="Dessert&Co map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.216833888844!2d10.51723107657259!3d42.92396490276466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5e3b3dd888889%3A0x68b46300db8747d3!2sVia%20Domenico%20Cimarosa%2C%205%2Fa%2C%2057025%20Piombino%20LI!5e0!3m2!1sit!2sit!4v1715644626395!5m2!1sit!2sit"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d730.3495166435705!2d10.518231269663467!3d42.92773428017147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d6236ccae4524f%3A0x82be4a1548cbeb30!2sDessert%20%26%20co%20di%20Roberta%20Rosetti!5e0!3m2!1sit!2sit!4v1791985546748!5m2!1sit!2sit"
                 className="absolute inset-0 h-full w-full"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
               ></iframe>
               <a
                 href={contactInfo.mapsUrl}
