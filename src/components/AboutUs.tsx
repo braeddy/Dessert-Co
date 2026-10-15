@@ -23,7 +23,7 @@ const AboutUs: React.FC = () => {
           <Reveal className="relative order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-[2.5rem] shadow-soft">
               <img
-                src="/aboutus-image-2.jpg"
+                src="/aboutus-image-2.webp"
                 alt={t('about.imageAlt')}
                 className="aspect-[4/5] w-full object-cover object-[70%_center] sm:aspect-[5/4] lg:aspect-[4/5]"
                 loading="lazy"

@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
             <Reveal delay={200} className="relative mx-auto max-w-md lg:ml-auto lg:mr-6">
               <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-soft">
                 <img
-                  src="/torta-1.jpg"
+                  src="/torta-1.webp"
                   alt="Wedding cake"
                   className="h-full w-full object-cover transition-transform duration-[2s] hover:scale-105"
                 />
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
               </div>
 
               <div className="absolute -bottom-10 -left-6 w-40 overflow-hidden rounded-3xl border-[6px] border-bakery-ivory shadow-soft sm:-left-16 sm:w-52">
-                <img src="/hero-image.jpg" alt="Roberta Rosetti cutting a wedding cake" className="aspect-square h-full w-full object-cover" />
+                <img src="/hero-image.webp" alt="Roberta Rosetti cutting a wedding cake" className="aspect-square h-full w-full object-cover" />
               </div>
 
               <div className="absolute -right-2 -top-6 sm:-right-10">

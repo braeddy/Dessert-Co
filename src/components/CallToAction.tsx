@@ -11,7 +11,7 @@ const CallToAction: React.FC = () => {
     <div className="px-4 py-12 md:py-16">
       <Reveal className="container relative mx-auto overflow-hidden rounded-[2.5rem] bg-bakery-cocoa px-6 py-16 text-center text-white md:px-16 md:py-20">
         <img
-          src="/torta-5.jpg"
+          src="/torta-5.webp"
           alt=""
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover opacity-40 mix-blend-luminosity"

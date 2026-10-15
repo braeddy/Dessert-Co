@@ -73,7 +73,10 @@ const Footer: React.FC = () => {
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/55 md:flex-row">
-          <p>&copy; {currentYear} {t('footer.copyright')}</p>
+          <p className="text-center md:text-left">
+            &copy; {currentYear} {t('footer.copyright')}
+            <span className="block md:ml-2 md:inline">{t('footer.vatLabel')} {contactInfo.vatNumber}</span>
+          </p>
 
           <ul className="flex flex-wrap items-center justify-center gap-6">
             <li>

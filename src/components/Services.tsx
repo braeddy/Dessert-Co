@@ -5,9 +5,9 @@ import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
 
 const services = [
-  { key: 'weddings', image: '/torta-6.jpg' },
-  { key: 'birthdays', image: '/gallery-2.jpg' },
-  { key: 'events', image: '/gallery-5.jpg' },
+  { key: 'weddings', image: '/torta-6.webp' },
+  { key: 'birthdays', image: '/gallery-2.webp' },
+  { key: 'events', image: '/gallery-5.webp' },
 ];
 
 const Services: React.FC = () => {

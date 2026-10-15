@@ -221,7 +221,7 @@ const ContactUs: React.FC = () => {
                 className="group absolute inset-0"
               >
                 <img
-                  src="/map.jpg"
+                  src="/map.webp"
                   alt={t('contact.address')}
                   width={1280}
                   height={560}
