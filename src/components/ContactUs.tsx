@@ -237,7 +237,7 @@ const ContactUs: React.FC = () => {
                 href="https://www.openstreetmap.org/copyright"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-0 right-0 rounded-tl-lg bg-white/80 px-2 py-0.5 text-[10px] text-bakery-brown/70 hover:text-bakery-cocoa"
+                className="absolute bottom-3 right-4 rounded-full bg-white/80 px-2 py-0.5 text-[10px] text-bakery-brown/70 hover:text-bakery-cocoa"
               >
                 © OpenStreetMap
               </a>
