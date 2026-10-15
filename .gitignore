@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .env
 .vercel
+
+# Cache di TypeScript e configurazione dell'editor Cursor
+*.tsbuildinfo
+.cursor/

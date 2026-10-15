@@ -83,9 +83,6 @@ const Footer: React.FC = () => {
               <Link to="/privacy-policy" className="transition-colors hover:text-white">{t('footer.privacyPolicy')}</Link>
             </li>
             <li>
-              <Link to="/terms-of-service" className="transition-colors hover:text-white">{t('footer.termsOfService')}</Link>
-            </li>
-            <li>
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="flex items-center gap-2 transition-colors hover:text-white"
