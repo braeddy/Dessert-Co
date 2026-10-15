@@ -5,6 +5,8 @@ const resources = {
   en: {
     translation: {
       hero: {
+        cakeAlt: "Wedding cake",
+        photoAlt: "Roberta Rosetti cutting a wedding cake",
         eyebrow: "Cake design · Piombino",
         line1: "Cakes that",
         accent: "tell the story",
@@ -91,6 +93,22 @@ const resources = {
         open: "Open image",
         title: "Our Creations",
         description: "Explore our gallery of custom cakes and desserts, each crafted with love and precision to make your celebrations unforgettable.",
+        alts: {
+          sunsetWedding: "Wedding cake with flower decorations at sunset",
+          poolsideHydrangeas: "Tiered wedding cake with pink roses and blue hydrangeas by the pool at night",
+          millefeuille: "Tiered millefeuille wedding cake with berries",
+          whiteFrosting: "Wedding cake with white frosting and flowers",
+          sugarFlowers: "White wedding cake by the pool with sugar flowers",
+          seminaked: "Semi-naked wedding cakes with fresh flowers on an illuminated staircase",
+          colorfulBirthday: "Birthday cake with colorful decorations",
+          peachRoses: "Wedding cake with peach roses and monogram topper",
+          cupcakes: "Cupcakes with vanilla frosting",
+          chocolateBerries: "Chocolate cake with berries",
+          lambeth: "Vintage Lambeth-style cake with pink and mint piping",
+          candles: "White wedding cake with roses surrounded by candles",
+          anniversaryGold: "Anniversary cake with gold decorations",
+          cartoonBirthday: "Children's birthday cake with cartoon theme"
+        },
       },
       services: {
         eyebrow: "What we create",
@@ -221,6 +239,8 @@ const resources = {
   it: {
     translation: {
       hero: {
+        cakeAlt: "Torta nuziale",
+        photoAlt: "Roberta Rosetti taglia una torta nuziale",
         eyebrow: "Cake design · Piombino",
         line1: "Torte che",
         accent: "raccontano",
@@ -307,6 +327,22 @@ const resources = {
         open: "Apri immagine",
         title: "Le nostre creazioni",
         description: "Esplora la nostra galleria di torte e dessert personalizzati, ognuno realizzato con amore e precisione per rendere indimenticabili le tue celebrazioni.",
+        alts: {
+          sunsetWedding: "Torta nuziale con decorazioni floreali al tramonto",
+          poolsideHydrangeas: "Torta nuziale a piani con rose rosa e ortensie blu a bordo piscina, di sera",
+          millefeuille: "Torta nuziale millefoglie a piani con frutti di bosco",
+          whiteFrosting: "Torta nuziale con glassa bianca e fiori",
+          sugarFlowers: "Torta nuziale bianca con fiori di zucchero a bordo piscina",
+          seminaked: "Torte nuziali semi-naked con fiori freschi su una scalinata illuminata",
+          colorfulBirthday: "Torta di compleanno con decorazioni colorate",
+          peachRoses: "Torta nuziale con rose color pesca e cake topper con monogramma",
+          cupcakes: "Cupcake con crema alla vaniglia",
+          chocolateBerries: "Torta al cioccolato con frutti di bosco",
+          lambeth: "Torta vintage in stile Lambeth con decorazioni rosa e verde menta",
+          candles: "Torta nuziale bianca con rose circondata da candele",
+          anniversaryGold: "Torta per anniversario con decorazioni dorate",
+          cartoonBirthday: "Torta di compleanno per bambini a tema cartoni animati"
+        },
       },
       services: {
         eyebrow: "Cosa realizziamo",
@@ -437,6 +473,8 @@ const resources = {
   de: {
     translation: {
       hero: {
+        cakeAlt: "Hochzeitstorte",
+        photoAlt: "Roberta Rosetti schneidet eine Hochzeitstorte an",
         eyebrow: "Cake Design · Piombino",
         line1: "Torten, die",
         accent: "Ihre Momente",
@@ -523,6 +561,22 @@ const resources = {
         open: "Bild öffnen",
         title: "Unsere Kreationen",
         description: "Entdecken Sie unsere Galerie maßgeschneiderter Kuchen und Desserts, die mit Liebe und Präzision gefertigt wurden, um Ihre Feiern unvergesslich zu machen.",
+        alts: {
+          sunsetWedding: "Hochzeitstorte mit Blumendekoration bei Sonnenuntergang",
+          poolsideHydrangeas: "Mehrstöckige Hochzeitstorte mit rosa Rosen und blauen Hortensien am Pool bei Nacht",
+          millefeuille: "Mehrstöckige Millefeuille-Hochzeitstorte mit Beeren",
+          whiteFrosting: "Hochzeitstorte mit weißer Glasur und Blumen",
+          sugarFlowers: "Weiße Hochzeitstorte mit Zuckerblumen am Pool",
+          seminaked: "Semi-Naked-Hochzeitstorten mit frischen Blumen auf einer beleuchteten Treppe",
+          colorfulBirthday: "Geburtstagstorte mit bunter Dekoration",
+          peachRoses: "Hochzeitstorte mit pfirsichfarbenen Rosen und Monogramm-Topper",
+          cupcakes: "Cupcakes mit Vanillecreme",
+          chocolateBerries: "Schokoladentorte mit Beeren",
+          lambeth: "Vintage-Torte im Lambeth-Stil mit rosa und mintgrünen Verzierungen",
+          candles: "Weiße Hochzeitstorte mit Rosen, umgeben von Kerzen",
+          anniversaryGold: "Jubiläumstorte mit goldener Dekoration",
+          cartoonBirthday: "Kindergeburtstagstorte im Cartoon-Stil"
+        },
       },
       services: {
         eyebrow: "Was wir kreieren",

@@ -93,14 +93,14 @@ const Hero: React.FC = () => {
               <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-soft">
                 <img
                   src="/torta-1.webp"
-                  alt="Wedding cake"
+                  alt={t('hero.cakeAlt')}
                   className="h-full w-full object-cover transition-transform duration-[2s] hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bakery-cocoa/30 via-transparent to-transparent" />
               </div>
 
               <div className="absolute -bottom-10 -left-6 w-40 overflow-hidden rounded-3xl border-[6px] border-bakery-ivory shadow-soft sm:-left-16 sm:w-52">
-                <img src="/hero-image.webp" alt="Roberta Rosetti cutting a wedding cake" className="aspect-square h-full w-full object-cover" />
+                <img src="/hero-image.webp" alt={t('hero.photoAlt')} className="aspect-square h-full w-full object-cover" />
               </div>
 
               <div className="absolute -right-2 -top-6 sm:-right-10">

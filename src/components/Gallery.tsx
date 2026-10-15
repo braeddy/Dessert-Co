@@ -90,12 +90,12 @@ const Gallery: React.FC = () => {
                   <Reveal key={image.url} delay={(colIndex + rowIndex) % 3 * 100}>
                     <button
                       onClick={() => setSelectedIndex(index)}
-                      aria-label={`${t('gallery.open')}: ${image.alt}`}
+                      aria-label={`${t('gallery.open')}: ${t(`gallery.alts.${image.altKey}`)}`}
                       className="group relative block w-full overflow-hidden rounded-[1.75rem] bg-bakery-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose focus-visible:ring-offset-4"
                     >
                       <img
                         src={image.url}
-                        alt={image.alt}
+                        alt={t(`gallery.alts.${image.altKey}`)}
                         width={image.width}
                         height={image.height}
                         loading="lazy"
@@ -149,7 +149,7 @@ const Gallery: React.FC = () => {
             <img
               key={selected.url}
               src={selected.url}
-              alt={selected.alt}
+              alt={t(`gallery.alts.${selected.altKey}`)}
               className="max-h-[80vh] w-auto animate-fade-in rounded-2xl object-contain shadow-2xl"
             />
             <figcaption className="mt-4 text-sm tracking-wider text-white/70">
