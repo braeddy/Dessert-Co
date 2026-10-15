@@ -214,23 +214,32 @@ const ContactUs: React.FC = () => {
             </div>
 
             <div className="relative h-64 overflow-hidden rounded-[2rem] shadow-soft">
-              <iframe
-                title="Dessert&Co map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d730.3495166435705!2d10.518231269663467!3d42.92773428017147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d6236ccae4524f%3A0x82be4a1548cbeb30!2sDessert%20%26%20co%20di%20Roberta%20Rosetti!5e0!3m2!1sit!2sit!4v1791985546748!5m2!1sit!2sit"
-                className="absolute inset-0 h-full w-full"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              ></iframe>
               <a
                 href={contactInfo.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-bakery-cocoa shadow-soft transition-colors hover:bg-bakery-pink"
+                className="group absolute inset-0"
               >
-                <Navigation size={14} />
-                {t('contact.directions')}
+                <img
+                  src="/map.jpg"
+                  alt={t('contact.address')}
+                  width={1280}
+                  height={560}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-bakery-cocoa shadow-soft transition-colors group-hover:bg-bakery-pink">
+                  <Navigation size={14} />
+                  {t('contact.directions')}
+                </span>
+              </a>
+              <a
+                href="https://www.openstreetmap.org/copyright"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-0 right-0 rounded-tl-lg bg-white/80 px-2 py-0.5 text-[10px] text-bakery-brown/70 hover:text-bakery-cocoa"
+              >
+                © OpenStreetMap
               </a>
             </div>
           </Reveal>

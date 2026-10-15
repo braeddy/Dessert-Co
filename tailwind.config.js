@@ -25,8 +25,8 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['Fraunces', 'Playfair Display', 'serif'],
-        sans: ['Manrope', 'Poppins', 'sans-serif'],
+        serif: ['"Fraunces Variable"', 'Playfair Display', 'serif'],
+        sans: ['"Manrope Variable"', 'Poppins', 'sans-serif'],
         script: ['"Pinyon Script"', 'cursive'],
       },
       boxShadow: {

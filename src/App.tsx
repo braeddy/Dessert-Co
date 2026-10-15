@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import CookieConsent from './components/CookieConsent';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Home from './pages/Home';
-import { initializeCookies } from './services/cookieService';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  // Inizializza la gestione dei cookie all'avvio
-  useEffect(() => {
-    initializeCookies();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +35,6 @@ function App() {
         </Routes>
       </main>
       <Footer />
-      <CookieConsent />
     </div>
   );
 }

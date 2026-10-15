@@ -161,16 +161,9 @@ const resources = {
         privacyPolicy: "Privacy Policy",
         termsOfService: "Terms of Service",
       },
-      cookies: {
-        title: "Cookie Policy",
-        description: "This site uses necessary technical cookies and analytical cookies to enhance your experience. You can accept all cookies or only those essential for navigation.",
-        acceptEssential: "Only essential cookies",
-        acceptAll: "Accept all cookies",
-        privacyPolicy: "Privacy Policy",
-      },
       privacy: {
         title: "Privacy Policy",
-        lastUpdated: "Last updated: May 18, 2024",
+        lastUpdated: "Last updated: October 15, 2026",
         introduction: {
           title: "Introduction",
           content: "Your privacy is important to us. This Privacy Policy explains how Dessert&Co collects, uses and protects the information you provide when using our website."
@@ -180,33 +173,25 @@ const resources = {
           content: "We collect different types of information for various purposes to provide and improve our services. This information may include:",
           item1: "Personal information (such as name, email address, and phone number) that you voluntarily provide when using our contact form.",
           item2: "Usage and technical data collected automatically when you visit our site.",
-          item3: "Information about cookies stored on your device when you visit our site."
+          item3: "Anonymous, aggregated visit statistics (such as pages viewed, country and device type), collected without cookies and without identifying individual visitors."
         },
         cookies: {
-          title: "Use of Cookies",
-          content: "Our site uses cookies to improve your experience. Cookies are small text files stored on your device. We use the following types of cookies:",
-          essential: {
-            title: "Essential cookies",
-            content: "Necessary for the website to function. They cannot be disabled."
-          },
-          analytics: {
-            title: "Analytical cookies",
-            content: "Help us understand how you use the site, to improve your future experience."
-          },
-          control: "You can manage your cookie preferences through the cookie banner displayed when you visit our site."
+          title: "Cookies",
+          content: "This site does not use cookies — neither technical, analytical nor profiling ones — and does not load third-party content that sets them (such as embedded maps, videos or external fonts). For this reason no consent banner is shown.",
+          control: "Visit statistics are collected with Vercel Web Analytics, a service that does not use cookies and cannot recognise individual visitors."
         },
         dataUse: {
           title: "Use of Data",
           content: "We use the collected information to:",
           item1: "Provide, manage, and improve our services",
           item2: "Respond to your requests and communicate with you",
-          item3: "Analyze how you use our site to improve it",
+          item3: "Understand, through anonymous and aggregated statistics, which pages of the site are visited most",
           item4: "Prevent potentially prohibited or illegal activities"
         },
         dataSharing: {
           title: "Data Sharing",
           content: "We do not sell, trade, or otherwise transfer your personal information to third parties, except as described in this Privacy Policy.",
-          item1: "Service providers that help us manage the site and services",
+          item1: "Service providers that help us run the site: Vercel (hosting and anonymous statistics) and Resend (delivery of contact form emails)",
           item2: "Legal authorities when required by law"
         },
         dataRetention: {
@@ -464,16 +449,9 @@ const resources = {
         privacyPolicy: "Informativa sulla privacy",
         termsOfService: "Termini di servizio",
       },
-      cookies: {
-        title: "Informativa sui Cookie",
-        description: "Questo sito utilizza cookie tecnici necessari al funzionamento e cookie analitici per migliorare la tua esperienza. Puoi accettare tutti i cookie o solo quelli essenziali per la navigazione.",
-        acceptEssential: "Solo cookie essenziali",
-        acceptAll: "Accetta tutti i cookie",
-        privacyPolicy: "Informativa sulla privacy",
-      },
       privacy: {
         title: "Informativa sulla Privacy",
-        lastUpdated: "Ultimo aggiornamento: 18 maggio 2024",
+        lastUpdated: "Ultimo aggiornamento: 15 ottobre 2026",
         introduction: {
           title: "Introduzione",
           content: "La tua privacy è importante per noi. Questa Informativa sulla Privacy spiega come Dessert&Co raccoglie, utilizza e protegge le informazioni che ci fornisci quando utilizzi il nostro sito web."
@@ -483,33 +461,25 @@ const resources = {
           content: "Raccogliamo diversi tipi di informazioni per vari scopi, per fornire e migliorare i nostri servizi. Queste informazioni possono includere:",
           item1: "Informazioni personali (come nome, indirizzo email e numero di telefono) che ci fornisci volontariamente quando utilizzi il nostro modulo di contatto.",
           item2: "Informazioni di utilizzo e dati tecnici raccolti automaticamente quando visiti il nostro sito.",
-          item3: "Informazioni sui cookie memorizzati sul tuo dispositivo quando visiti il nostro sito."
+          item3: "Statistiche di visita anonime e aggregate (ad esempio pagine visitate, paese e tipo di dispositivo), raccolte senza cookie e senza identificare i singoli visitatori."
         },
         cookies: {
-          title: "Utilizzo dei Cookie",
-          content: "Il nostro sito utilizza cookie per migliorare la tua esperienza. I cookie sono piccoli file di testo memorizzati sul tuo dispositivo. Utilizziamo i seguenti tipi di cookie:",
-          essential: {
-            title: "Cookie essenziali",
-            content: "Necessari per il funzionamento del sito web. Non possono essere disattivati."
-          },
-          analytics: {
-            title: "Cookie analitici",
-            content: "Ci aiutano a capire come utilizzi il sito, per migliorare la tua esperienza futura."
-          },
-          control: "Puoi gestire le tue preferenze sui cookie attraverso il banner dei cookie visualizzato quando visiti il nostro sito."
+          title: "Cookie",
+          content: "Questo sito non utilizza cookie, né tecnici, né analitici, né di profilazione, e non carica contenuti di terze parti che ne installino (come mappe, video o font esterni). Per questo non viene mostrato alcun banner per il consenso.",
+          control: "Le statistiche di visita sono raccolte con Vercel Web Analytics, un servizio che non usa cookie e non permette di riconoscere il singolo visitatore."
         },
         dataUse: {
           title: "Utilizzo dei Dati",
           content: "Utilizziamo le informazioni raccolte per:",
           item1: "Fornire, gestire e migliorare i nostri servizi",
           item2: "Rispondere alle tue richieste e comunicare con te",
-          item3: "Analizzare come utilizzi il nostro sito per migliorarlo",
+          item3: "Capire, tramite statistiche anonime e aggregate, quali pagine del sito sono più visitate",
           item4: "Prevenire attività potenzialmente proibite o illegali"
         },
         dataSharing: {
           title: "Condivisione dei Dati",
           content: "Non vendiamo, scambiamo o trasferiamo in altro modo le tue informazioni personali a terze parti, tranne come descritto in questa Informativa sulla Privacy.",
-          item1: "Fornitori di servizi che ci aiutano a gestire il sito e i servizi",
+          item1: "Fornitori di servizi che ci aiutano a gestire il sito: Vercel (hosting e statistiche anonime) e Resend (invio delle email del modulo di contatto)",
           item2: "Autorità legali quando richiesto dalla legge"
         },
         dataRetention: {
@@ -767,16 +737,9 @@ const resources = {
         privacyPolicy: "Datenschutzrichtlinie",
         termsOfService: "Nutzungsbedingungen",
       },
-      cookies: {
-        title: "Cookie-Richtlinie",
-        description: "Diese Website verwendet technische Cookies, die für den Betrieb erforderlich sind, und Analyse-Cookies, um Ihre Erfahrung zu verbessern. Sie können alle Cookies akzeptieren oder nur die für die Navigation wesentlichen.",
-        acceptEssential: "Nur wesentliche Cookies",
-        acceptAll: "Alle Cookies akzeptieren",
-        privacyPolicy: "Datenschutzrichtlinie",
-      },
       privacy: {
         title: "Datenschutzrichtlinie",
-        lastUpdated: "Letzte Aktualisierung: 18. Mai 2024",
+        lastUpdated: "Letzte Aktualisierung: 15. Oktober 2026",
         introduction: {
           title: "Einführung",
           content: "Ihre Privatsphäre ist uns wichtig. Diese Datenschutzrichtlinie erklärt, wie Dessert&Co Informationen sammelt, verwendet und schützt, die Sie bei der Nutzung unserer Website bereitstellen."
@@ -786,33 +749,25 @@ const resources = {
           content: "Wir sammeln verschiedene Arten von Informationen für verschiedene Zwecke, um unsere Dienste bereitzustellen und zu verbessern. Diese Informationen können umfassen:",
           item1: "Persönliche Informationen (wie Name, E-Mail-Adresse und Telefonnummer), die Sie freiwillig angeben, wenn Sie unser Kontaktformular verwenden.",
           item2: "Nutzungs- und technische Daten, die automatisch erfasst werden, wenn Sie unsere Website besuchen.",
-          item3: "Informationen zu Cookies, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen."
+          item3: "Anonyme, aggregierte Besuchsstatistiken (z. B. aufgerufene Seiten, Land und Gerätetyp), die ohne Cookies und ohne Identifizierung einzelner Besucher erhoben werden."
         },
         cookies: {
-          title: "Verwendung von Cookies",
-          content: "Unsere Website verwendet Cookies, um Ihre Erfahrung zu verbessern. Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden. Wir verwenden die folgenden Arten von Cookies:",
-          essential: {
-            title: "Wesentliche Cookies",
-            content: "Notwendig für die Funktionalität der Website. Sie können nicht deaktiviert werden."
-          },
-          analytics: {
-            title: "Analyse-Cookies",
-            content: "Helfen uns zu verstehen, wie Sie die Website nutzen, um Ihre zukünftige Erfahrung zu verbessern."
-          },
-          control: "Sie können Ihre Cookie-Einstellungen über das Cookie-Banner verwalten, das angezeigt wird, wenn Sie unsere Website besuchen."
+          title: "Cookies",
+          content: "Diese Website verwendet keine Cookies – weder technische noch Analyse- oder Profiling-Cookies – und lädt keine Inhalte von Drittanbietern, die solche setzen (etwa eingebettete Karten, Videos oder externe Schriftarten). Daher wird kein Einwilligungsbanner angezeigt.",
+          control: "Besuchsstatistiken werden mit Vercel Web Analytics erhoben, einem Dienst, der keine Cookies verwendet und einzelne Besucher nicht wiedererkennen kann."
         },
         dataUse: {
           title: "Datennutzung",
           content: "Wir verwenden die gesammelten Informationen, um:",
           item1: "Unsere Dienste bereitzustellen, zu verwalten und zu verbessern",
           item2: "Auf Ihre Anfragen zu antworten und mit Ihnen zu kommunizieren",
-          item3: "Zu analysieren, wie Sie unsere Website nutzen, um sie zu verbessern",
+          item3: "Anhand anonymer, aggregierter Statistiken zu verstehen, welche Seiten der Website am häufigsten besucht werden",
           item4: "Potenziell verbotene oder illegale Aktivitäten zu verhindern"
         },
         dataSharing: {
           title: "Datenweitergabe",
           content: "Wir verkaufen, tauschen oder übertragen Ihre persönlichen Daten nicht an Dritte, außer wie in dieser Datenschutzrichtlinie beschrieben.",
-          item1: "Dienstleister, die uns bei der Verwaltung der Website und der Dienste helfen",
+          item1: "Dienstleister, die uns beim Betrieb der Website helfen: Vercel (Hosting und anonyme Statistiken) und Resend (Versand der E-Mails des Kontaktformulars)",
           item2: "Rechtliche Behörden, wenn gesetzlich vorgeschrieben"
         },
         dataRetention: {

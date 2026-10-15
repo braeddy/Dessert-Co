@@ -10,7 +10,7 @@ const PrivacyPolicy: React.FC = () => {
       <div className="mx-auto max-w-3xl rounded-[2rem] bg-white p-6 shadow-soft md:p-12">
         <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight mb-8 text-bakery-cocoa">{t('privacy.title', 'Informativa sulla Privacy')}</h1>
         <div className="prose prose-lg max-w-none text-gray-700">
-          <p className="mb-6">{t('privacy.lastUpdated', 'Ultimo aggiornamento: 18 maggio 2024')}</p>
+          <p className="mb-6">{t('privacy.lastUpdated', 'Ultimo aggiornamento: 15 ottobre 2026')}</p>
           
           <h2 className="font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown">{t('privacy.introduction.title', 'Introduzione')}</h2>
           <p>{t('privacy.introduction.content', 'La tua privacy è importante per noi. Questa Informativa sulla Privacy spiega come Dessert&Co raccoglie, utilizza e protegge le informazioni che ci fornisci quando utilizzi il nostro sito web. Ci impegniamo a garantire la protezione dei tuoi dati personali e a rispettare le leggi applicabili sulla protezione dei dati, incluso il Regolamento Generale sulla Protezione dei Dati (GDPR) dell\'Unione Europea.')}</p>
@@ -20,36 +20,26 @@ const PrivacyPolicy: React.FC = () => {
           <ul className="list-disc pl-6 mb-6">
             <li>{t('privacy.dataCollection.item1', 'Informazioni personali (come nome, indirizzo email e numero di telefono) che ci fornisci volontariamente quando utilizzi il nostro modulo di contatto.')}</li>
             <li>{t('privacy.dataCollection.item2', 'Informazioni di utilizzo e dati tecnici (come indirizzo IP, tipo di browser, dispositivo utilizzato) raccolti automaticamente quando visiti il nostro sito.')}</li>
-            <li>{t('privacy.dataCollection.item3', 'Informazioni sui cookie memorizzati sul tuo dispositivo quando visiti il nostro sito.')}</li>
+            <li>{t('privacy.dataCollection.item3', 'Statistiche di visita anonime e aggregate (ad esempio pagine visitate, paese e tipo di dispositivo), raccolte senza cookie e senza identificare i singoli visitatori.')}</li>
           </ul>
           
-          <h2 className="font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown">{t('privacy.cookies.title', 'Utilizzo dei Cookie')}</h2>
-          <p>{t('privacy.cookies.content', 'Il nostro sito utilizza cookie per migliorare la tua esperienza. I cookie sono piccoli file di testo memorizzati sul tuo dispositivo. Utilizziamo i seguenti tipi di cookie:')}</p>
-          <ul className="list-disc pl-6 mb-6">
-            <li>
-              <strong>{t('privacy.cookies.essential.title', 'Cookie essenziali:')}</strong>{' '}
-              {t('privacy.cookies.essential.content', 'Necessari per il funzionamento del sito web. Non possono essere disattivati.')}
-            </li>
-            <li>
-              <strong>{t('privacy.cookies.analytics.title', 'Cookie analitici:')}</strong>{' '}
-              {t('privacy.cookies.analytics.content', 'Ci aiutano a capire come utilizzi il sito, per migliorare la tua esperienza futura. Questi cookie raccolgono informazioni aggregate e anonime.')}
-            </li>
-          </ul>
-          <p>{t('privacy.cookies.control', 'Puoi gestire le tue preferenze sui cookie attraverso il banner dei cookie visualizzato quando visiti il nostro sito. In alternativa, puoi modificare le impostazioni del tuo browser per bloccare o eliminare i cookie, ma ciò potrebbe influire sulla tua esperienza di navigazione.')}</p>
+          <h2 className="font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown">{t('privacy.cookies.title', 'Cookie')}</h2>
+          <p>{t('privacy.cookies.content', 'Questo sito non utilizza cookie, né tecnici, né analitici, né di profilazione, e non carica contenuti di terze parti che ne installino (come mappe, video o font esterni). Per questo non viene mostrato alcun banner per il consenso.')}</p>
+          <p className="mt-4">{t('privacy.cookies.control', 'Le statistiche di visita sono raccolte con Vercel Web Analytics, un servizio che non usa cookie e non permette di riconoscere il singolo visitatore.')}</p>
           
           <h2 className="font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown">{t('privacy.dataUse.title', 'Utilizzo dei Dati')}</h2>
           <p>{t('privacy.dataUse.content', 'Utilizziamo le informazioni raccolte per:')}</p>
           <ul className="list-disc pl-6 mb-6">
             <li>{t('privacy.dataUse.item1', 'Fornire, gestire e migliorare i nostri servizi')}</li>
             <li>{t('privacy.dataUse.item2', 'Rispondere alle tue richieste e comunicare con te')}</li>
-            <li>{t('privacy.dataUse.item3', 'Analizzare come utilizzi il nostro sito per migliorarlo')}</li>
+            <li>{t('privacy.dataUse.item3', 'Capire, tramite statistiche anonime e aggregate, quali pagine del sito sono più visitate')}</li>
             <li>{t('privacy.dataUse.item4', 'Prevenire attività potenzialmente proibite o illegali')}</li>
           </ul>
           
           <h2 className="font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown">{t('privacy.dataSharing.title', 'Condivisione dei Dati')}</h2>
           <p>{t('privacy.dataSharing.content', 'Non vendiamo, scambiamo o trasferiamo in altro modo le tue informazioni personali a terze parti, tranne come descritto in questa Informativa sulla Privacy. Possiamo condividere le tue informazioni con:')}</p>
           <ul className="list-disc pl-6 mb-6">
-            <li>{t('privacy.dataSharing.item1', 'Fornitori di servizi che ci aiutano a gestire il sito e i servizi (come servizi di hosting)')}</li>
+            <li>{t('privacy.dataSharing.item1', 'Fornitori di servizi che ci aiutano a gestire il sito: Vercel (hosting e statistiche anonime) e Resend (invio delle email del modulo di contatto)')}</li>
             <li>{t('privacy.dataSharing.item2', 'Autorità legali quando richiesto dalla legge')}</li>
           </ul>
           
