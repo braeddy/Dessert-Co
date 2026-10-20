@@ -15,7 +15,10 @@ const languages = [
   { code: 'de', label: 'Deutsch' },
 ];
 
-const LanguageSwitcher: React.FC<{ align?: 'left' | 'right' }> = ({ align = 'right' }) => {
+const LanguageSwitcher: React.FC<{ align?: 'left' | 'right'; direction?: 'down' | 'up' }> = ({
+  align = 'right',
+  direction = 'down',
+}) => {
   const { i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -50,7 +53,9 @@ const LanguageSwitcher: React.FC<{ align?: 'left' | 'right' }> = ({ align = 'rig
       </button>
       <div
         role="listbox"
-        className={`absolute ${align === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'} mt-2 w-40 origin-top overflow-hidden rounded-2xl border border-bakery-brown/10 bg-white/95 p-1.5 shadow-soft backdrop-blur-xl transition-all duration-200 ${
+        className={`absolute ${align === 'right' ? 'right-0' : 'left-0'} ${
+          direction === 'up' ? 'bottom-full mb-2 origin-bottom-left' : 'top-full mt-2 origin-top'
+        } w-40 overflow-hidden rounded-2xl border border-bakery-brown/10 bg-white/95 p-1.5 shadow-soft backdrop-blur-xl transition-all duration-200 ${
           dropdownOpen ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
         }`}
       >
@@ -218,7 +223,8 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         </ul>
 
         <div className="relative flex items-center justify-between gap-4 px-8 pb-10">
-          <LanguageSwitcher align="left" />
+          {/* In fondo allo schermo il menu si apre verso l'alto */}
+          <LanguageSwitcher align="left" direction="up" />
           <button onClick={() => scrollToSection('contact')} className="btn-primary">
             {t('header.cta')}
             <ArrowUpRight size={16} />
