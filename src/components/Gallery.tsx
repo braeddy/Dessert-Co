@@ -1,49 +1,68 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
-import { X, ChevronLeft, ChevronRight, Instagram, Expand } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Instagram, Expand, ChevronDown } from 'lucide-react';
 import { galleryImages, contactInfo } from '../constants';
 import { useTranslation } from 'react-i18next';
 
-// Numero di colonne in base ai breakpoint Tailwind (sm: 640px, lg: 1024px)
+// Foto mostrate su mobile prima di espandere la galleria
+const MOBILE_PREVIEW_COUNT = 7;
+
+// Numero di colonne in base ai breakpoint Tailwind (sm: 640px, lg: 1024px).
+// Su mobile si usano 2 colonne compatte invece di una sola a tutta larghezza.
 const getColumnCount = () => {
-  if (typeof window === 'undefined') return 1;
+  if (typeof window === 'undefined') return 2;
   if (window.matchMedia('(min-width: 1024px)').matches) return 3;
-  if (window.matchMedia('(min-width: 640px)').matches) return 2;
-  return 1;
+  return 2;
 };
+
+const getIsMobile = () => typeof window !== 'undefined' && !window.matchMedia('(min-width: 640px)').matches;
 
 const useColumnCount = () => {
   const [count, setCount] = useState(getColumnCount);
+  const [isMobile, setIsMobile] = useState(getIsMobile);
 
   useEffect(() => {
     const queries = ['(min-width: 640px)', '(min-width: 1024px)'].map((q) => window.matchMedia(q));
-    const update = () => setCount(getColumnCount());
+    const update = () => {
+      setCount(getColumnCount());
+      setIsMobile(getIsMobile());
+    };
     queries.forEach((mq) => mq.addEventListener('change', update));
     return () => queries.forEach((mq) => mq.removeEventListener('change', update));
   }, []);
 
-  return count;
+  return { columnCount: count, isMobile };
 };
 
 const Gallery: React.FC = () => {
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const columnCount = useColumnCount();
+  const { columnCount, isMobile } = useColumnCount();
+  const [expanded, setExpanded] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const total = galleryImages.length;
+  const collapsed = isMobile && !expanded && total > MOBILE_PREVIEW_COUNT;
+  const visibleCount = collapsed ? MOBILE_PREVIEW_COUNT : total;
 
   // Distribuisce le foto nella colonna più bassa, così le colonne restano bilanciate
   const columns = useMemo(() => {
     const cols: number[][] = Array.from({ length: columnCount }, () => []);
     const heights = new Array(columnCount).fill(0);
-    galleryImages.forEach((image, index) => {
+    galleryImages.slice(0, visibleCount).forEach((image, index) => {
       const shortest = heights.indexOf(Math.min(...heights));
       cols[shortest].push(index);
       heights[shortest] += image.height / image.width;
     });
     return cols;
-  }, [columnCount]);
+  }, [columnCount, visibleCount]);
 
-  const total = galleryImages.length;
+  const toggleExpanded = () => {
+    // Richiudendo, riporta l'utente all'inizio della galleria
+    if (expanded) gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setExpanded(!expanded);
+  };
 
   const closeModal = useCallback(() => setSelectedIndex(null), []);
   const showNext = useCallback(() => setSelectedIndex((i) => (i === null ? i : (i + 1) % total)), [total]);
@@ -81,9 +100,9 @@ const Gallery: React.FC = () => {
         </div>
 
         {/* Griglia masonry */}
-        <div className="flex gap-5">
+        <div ref={gridRef} className="relative flex scroll-mt-28 gap-3 sm:gap-5">
           {columns.map((column, colIndex) => (
-            <div key={colIndex} className="flex min-w-0 flex-1 flex-col gap-5">
+            <div key={colIndex} className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-5">
               {column.map((index, rowIndex) => {
                 const image = galleryImages[index];
                 return (
@@ -91,7 +110,7 @@ const Gallery: React.FC = () => {
                     <button
                       onClick={() => setSelectedIndex(index)}
                       aria-label={`${t('gallery.open')}: ${t(`gallery.alts.${image.altKey}`)}`}
-                      className="group relative block w-full overflow-hidden rounded-[1.75rem] bg-bakery-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose focus-visible:ring-offset-4"
+                      className="group relative block w-full overflow-hidden rounded-2xl bg-bakery-cream sm:rounded-[1.75rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose focus-visible:ring-offset-4"
                     >
                       <img
                         src={image.url}
@@ -111,7 +130,20 @@ const Gallery: React.FC = () => {
               })}
             </div>
           ))}
+          {/* Sfumatura che suggerisce altre foto (colore = ivory + cream/40 dello sfondo sezione) */}
+          {collapsed && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#faf2e8] to-transparent" />
+          )}
         </div>
+
+        {isMobile && total > MOBILE_PREVIEW_COUNT && (
+          <div className="mt-6 flex justify-center">
+            <button onClick={toggleExpanded} aria-expanded={expanded} className="btn-primary">
+              {expanded ? t('gallery.showLess') : t('gallery.showAll', { count: total })}
+              <ChevronDown size={16} className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
+        )}
 
         <Reveal className="mt-10 flex justify-center">
           <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="btn-ghost bg-white/60">

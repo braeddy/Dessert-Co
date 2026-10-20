@@ -91,6 +91,8 @@ const resources = {
         next: "Next image",
         instagram: "See more creations on Instagram",
         open: "Open image",
+        showAll: "Show all {{count}} photos",
+        showLess: "Show fewer photos",
         title: "Our Creations",
         description: "Explore our gallery of custom cakes and desserts, each crafted with love and precision to make your celebrations unforgettable.",
         alts: {
@@ -325,6 +327,8 @@ const resources = {
         next: "Immagine successiva",
         instagram: "Scopri altre creazioni su Instagram",
         open: "Apri immagine",
+        showAll: "Mostra tutte le {{count}} foto",
+        showLess: "Mostra meno foto",
         title: "Le nostre creazioni",
         description: "Esplora la nostra galleria di torte e dessert personalizzati, ognuno realizzato con amore e precisione per rendere indimenticabili le tue celebrazioni.",
         alts: {
@@ -559,6 +563,8 @@ const resources = {
         next: "Nächstes Bild",
         instagram: "Weitere Kreationen auf Instagram",
         open: "Bild öffnen",
+        showAll: "Alle {{count}} Fotos anzeigen",
+        showLess: "Weniger Fotos anzeigen",
         title: "Unsere Kreationen",
         description: "Entdecken Sie unsere Galerie maßgeschneiderter Kuchen und Desserts, die mit Liebe und Präzision gefertigt wurden, um Ihre Feiern unvergesslich zu machen.",
         alts: {
