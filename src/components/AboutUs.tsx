@@ -23,9 +23,9 @@ const AboutUs: React.FC = () => {
           <Reveal className="relative order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-[2.5rem] shadow-soft">
               <img
-                src="/aboutus-image-2.webp"
+                src="/aboutus-image-3.webp"
                 alt={t('about.imageAlt')}
-                className="aspect-[4/5] w-full object-cover object-[70%_center] sm:aspect-[5/4] lg:aspect-[4/5]"
+                className="aspect-[4/5] w-full object-cover object-[65%_center] sm:aspect-[5/4] lg:aspect-[4/5]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-bakery-cocoa/70 via-bakery-cocoa/0 to-transparent" />
