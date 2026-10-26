@@ -109,9 +109,12 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     return () => observer.disconnect();
   }, [isHome]);
 
-  // Blocca lo scroll della pagina con il menu mobile aperto
+  // Blocca lo scroll della pagina con il menu mobile aperto (su iPhone serve anche su <html>,
+  // altrimenti la pagina sotto scorre e la barra degli indirizzi sposta il menu)
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    const value = mobileMenuOpen ? 'hidden' : '';
+    document.documentElement.style.overflow = value;
+    document.body.style.overflow = value;
   }, [mobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
@@ -189,13 +192,20 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       </div>
 
       {/* Menu mobile */}
+      {/* Le sfumature rosa e azzurra sono gradienti dello sfondo e non elementi con filter: blur,
+          che su Safari mobile sfarfallano o si ritagliano mentre i pulsanti si animano */}
       <div
-        className={`fixed inset-0 z-50 flex flex-col bg-bakery-ivory transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-50 flex flex-col overflow-hidden overscroll-none transition-all duration-500 lg:hidden ${
           mobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
+        style={{
+          background: [
+            'radial-gradient(circle at calc(100% - 48px) 48px, rgb(246 214 218 / 0.7) 0, rgb(246 214 218 / 0.35) 150px, rgb(246 214 218 / 0) 300px)',
+            'radial-gradient(circle at 48px calc(100% - 48px), rgb(166 213 233 / 0.5) 0, rgb(166 213 233 / 0.25) 150px, rgb(166 213 233 / 0) 300px)',
+            '#FCF8F3',
+          ].join(', '),
+        }}
       >
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-bakery-pink/70 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-bakery-blue/50 blur-3xl" />
 
         <div className="relative flex items-center justify-between px-5 pt-5">
           <Logo size="small" />

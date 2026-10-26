@@ -6,6 +6,8 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
+    /* Niente riquadro grigio di Safari mobile al tocco: i pulsanti hanno già i loro stati */
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
