@@ -34,11 +34,15 @@ const LanguageSwitcher: React.FC<{ align?: 'left' | 'right'; direction?: 'down' 
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    document.documentElement.lang = lng;
+    try {
+      localStorage.setItem('lang', lng);
+    } catch {
+      // Storage non disponibile (es. navigazione privata): la scelta vale solo per questa visita
+    }
     setDropdownOpen(false);
   };
 
-  const currentLanguage = i18n.language;
+  const currentLanguage = i18n.resolvedLanguage ?? 'it';
 
   return (
     <div className="relative" ref={ref}>

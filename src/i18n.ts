@@ -1,4 +1,5 @@
 import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
@@ -712,10 +713,23 @@ const resources = {
   },
 };
 
-i18n.use(initReactI18next).init({
+// Mantiene l'attributo lang della pagina allineato alla lingua attiva
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng;
+});
+
+i18n.use(LanguageDetector).use(initReactI18next).init({
   resources,
-  lng: 'it', // Lingua predefinita
-  fallbackLng: 'en', // Lingua di fallback
+  supportedLngs: ['it', 'en', 'de'],
+  load: 'languageOnly', // "de-CH" diventa "de"
+  fallbackLng: 'en', // Lingua usata se quella del browser non è disponibile
+  detection: {
+    // Prima la scelta fatta dall'utente nel menu, poi la lingua del browser
+    order: ['localStorage', 'navigator'],
+    lookupLocalStorage: 'lang',
+    caches: [], // La lingua viene salvata solo quando l'utente la sceglie dal menu
+    convertDetectedLanguage: (lng: string) => lng.split('-')[0],
+  },
   interpolation: {
     escapeValue: false, // React già gestisce la protezione contro XSS
   },
