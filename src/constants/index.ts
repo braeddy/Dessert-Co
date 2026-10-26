@@ -1,89 +1,72 @@
-export const galleryImages = [
-  {
-    url: "/torta-1.webp",
-    width: 1800,
-    height: 1200,
-    altKey: "sunsetWedding",
-  },
-  {
-    url: "/torta-6.webp",
-    width: 1908,
-    height: 1272,
-    altKey: "poolsideHydrangeas",
-  },
-  {
-    url: "/torta-3.webp",
-    width: 1066,
-    height: 1600,
-    altKey: "millefeuille",
-  },
-  {
-    url: "/gallery-1.webp",
-    width: 1600,
-    height: 1066,
-    altKey: "whiteFrosting",
-  },
-  {
-    url: "/torta-2.webp",
-    width: 1350,
-    height: 1800,
-    altKey: "sugarFlowers",
-  },
-  {
-    url: "/torta-8.webp",
-    width: 1350,
-    height: 1800,
-    altKey: "seminaked",
-  },
-  {
-    url: "/gallery-2.webp",
-    width: 1126,
-    height: 1088,
-    altKey: "colorfulBirthday",
-  },
-  {
-    url: "/torta-4.webp",
-    width: 1600,
-    height: 1064,
-    altKey: "peachRoses",
-  },
-  {
-    url: "/gallery-4.webp",
-    width: 1153,
-    height: 1600,
-    altKey: "cupcakes",
-  },
-  {
-    url: "/gallery-3.webp",
-    width: 1600,
-    height: 1066,
-    altKey: "chocolateBerries",
-  },
-  {
-    url: "/torta-7.webp",
-    width: 1600,
-    height: 1066,
-    altKey: "lambeth",
-  },
-  {
-    url: "/torta-5.webp",
-    width: 1600,
-    height: 1066,
-    altKey: "candles",
-  },
-  {
-    url: "/gallery-5.webp",
-    width: 2048,
-    height: 1365,
-    altKey: "anniversaryGold",
-  },
-  {
-    url: "/gallery-6.webp",
-    width: 2000,
-    height: 1333,
-    altKey: "cartoonBirthday",
-  }
-];
+import type { ImageMetadata } from '../utils/responsiveImage';
+
+// Galleria: ogni sottocartella di src/assets/gallery è una categoria.
+// Per aggiungere una foto basta copiarla nella cartella giusta (jpg, png o webp):
+// in fase di build viene convertita in WebP: miniature da 400/600/800px per la griglia
+// (il browser sceglie la più adatta allo schermo) e una versione da 1800px per il lightbox.
+// L'ordine segue il nome del file; un prefisso numerico ("01-") serve solo a ordinarle.
+export const galleryCategories = ['matrimoni', 'compleanni', 'eventi'] as const;
+export type GalleryCategory = (typeof galleryCategories)[number];
+
+export interface GalleryImage {
+  thumb: string;
+  thumbSrcSet: string;
+  full: string;
+  width: number;
+  height: number;
+  category: GalleryCategory;
+  // Nome del file senza prefisso numerico: chiave del testo alternativo specifico, se esiste
+  name: string;
+}
+
+
+const thumbs = import.meta.glob<ImageMetadata>('../assets/gallery/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+  eager: true,
+  import: 'default',
+  query: { w: '800', format: 'webp', as: 'metadata' },
+});
+const thumbSrcSets = import.meta.glob<string>('../assets/gallery/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+  eager: true,
+  import: 'default',
+  query: { w: '400;600;800', format: 'webp', as: 'srcset' },
+});
+const fulls = import.meta.glob<string>('../assets/gallery/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+  eager: true,
+  import: 'default',
+  query: { w: '1800', format: 'webp' },
+});
+
+const sortedImages: GalleryImage[] = Object.entries(thumbs)
+  .map(([path, meta]) => {
+    const [, category, file] = path.match(/gallery\/([^/]+)\/([^/]+)$/)!;
+    return {
+      thumb: meta.src,
+      thumbSrcSet: thumbSrcSets[path],
+      full: fulls[path],
+      width: meta.width,
+      height: meta.height,
+      category: category as GalleryCategory,
+      name: file.replace(/\.[^.]+$/, '').replace(/^\d+-/, ''),
+    };
+  })
+  .filter((image) => galleryCategories.includes(image.category))
+  .sort((a, b) => galleryCategories.indexOf(a.category) - galleryCategories.indexOf(b.category));
+
+// Alterna le categorie distribuendo le foto di ognuna in modo uniforme lungo la lista,
+// così la vista "Tutte" è varia anche se una categoria ha molte più foto delle altre.
+// Dentro ogni categoria l'ordine dei file resta invariato.
+const position = new Map<GalleryImage, number>();
+galleryCategories.forEach((category) => {
+  const inCategory = sortedImages.filter((image) => image.category === category);
+  inCategory.forEach((image, index) => position.set(image, (index + 0.5) / inCategory.length));
+});
+
+export const galleryImages: GalleryImage[] = [...sortedImages].sort(
+  (a, b) => position.get(a)! - position.get(b)! || galleryCategories.indexOf(a.category) - galleryCategories.indexOf(b.category)
+);
+
+// Titolo della scheda del browser, uguale a quello di index.html
+export const siteTitle = 'Dessert&Co di Roberta Rosetti – Torte personalizzate a Piombino';
 
 export const navSections = ['home', 'about', 'services', 'gallery', 'contact'] as const;
 

@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Plus, X, ArrowRight } from 'lucide-react';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
+import weddingsImage from '../assets/images/service-weddings.webp?w=600;900;1200;1600&format=webp&as=metadata';
+import birthdaysImage from '../assets/images/service-birthdays.webp?w=600;900;1200;1600&format=webp&as=metadata';
+import eventsImage from '../assets/images/service-events.webp?w=600;900;1200;1600&format=webp&as=metadata';
+import { toResponsive } from '../utils/responsiveImage';
 
 const services = [
-  { key: 'weddings', image: '/torta-6.webp' },
-  { key: 'birthdays', image: '/gallery-2.webp' },
-  { key: 'events', image: '/gallery-5.webp' },
+  { key: 'weddings', image: toResponsive(weddingsImage) },
+  { key: 'birthdays', image: toResponsive(birthdaysImage) },
+  { key: 'events', image: toResponsive(eventsImage) },
 ];
 
 const Services: React.FC = () => {
   const { t } = useTranslation();
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const closeRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const lastOpenKey = useRef<string | null>(null);
+
+  // Aprendo una card il focus va sul pulsante di chiusura del dettaglio;
+  // chiudendola torna sulla card, così chi usa la tastiera non perde il punto
+  useEffect(() => {
+    if (openKey) {
+      closeRefs.current[openKey]?.focus({ preventScroll: true });
+    } else if (lastOpenKey.current) {
+      triggerRefs.current[lastOpenKey.current]?.focus({ preventScroll: true });
+    }
+    lastOpenKey.current = openKey;
+  }, [openKey]);
 
   // Chiude la card aperta con il tasto Esc
   useEffect(() => {
@@ -51,7 +69,10 @@ const Services: React.FC = () => {
               <Reveal key={key} delay={index * 100}>
                 <div className="group relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-soft">
                   <img
-                    src={image}
+                    src={image.src}
+                    srcSet={image.srcSet}
+                    // Card 4:5 riempita da una foto più larga: su 3 colonne da md in su
+                    sizes="(min-width: 768px) 60vw, 180vw"
                     alt=""
                     loading="lazy"
                     className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${isOpen ? 'scale-110' : ''}`}
@@ -60,7 +81,10 @@ const Services: React.FC = () => {
 
                   {/* Fronte della card */}
                   <button
+                    ref={(el) => (triggerRefs.current[key] = el)}
                     onClick={() => setOpenKey(isOpen ? null : key)}
+                    // Coperta dal dettaglio quando è aperta: esce dalla sequenza del tasto Tab
+                    tabIndex={isOpen ? -1 : 0}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     className="absolute inset-0 flex flex-col justify-between p-6 text-left text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-bakery-rose"
@@ -85,13 +109,18 @@ const Services: React.FC = () => {
                     id={panelId}
                     role="region"
                     aria-label={t(`services.items.${key}.title`)}
-                    className={`absolute inset-0 flex flex-col gap-4 bg-bakery-cocoa/90 p-6 text-white backdrop-blur-sm transition-all duration-500 md:p-7 ${
-                      isOpen ? 'visible translate-y-0 opacity-100' : 'invisible translate-y-6 opacity-0'
+                    // Aprendo, il pannello diventa subito visibile (così può ricevere il focus);
+                    // chiudendo, sparisce solo alla fine della dissolvenza
+                    className={`absolute inset-0 flex flex-col gap-4 bg-bakery-cocoa/90 p-6 text-white backdrop-blur-sm md:p-7 ${
+                      isOpen
+                        ? 'visible translate-y-0 opacity-100 [transition:opacity_500ms,transform_500ms,visibility_0s]'
+                        : 'invisible translate-y-6 opacity-0 [transition:opacity_500ms,transform_500ms,visibility_0s_500ms]'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="font-serif text-2xl font-medium md:text-3xl">{t(`services.items.${key}.title`)}</h3>
                       <button
+                        ref={(el) => (closeRefs.current[key] = el)}
                         onClick={() => setOpenKey(null)}
                         aria-label={t('services.close')}
                         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-bakery-rose"

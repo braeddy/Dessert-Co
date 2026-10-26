@@ -3,6 +3,12 @@ import { ArrowRight, ArrowDown, Sparkles } from 'lucide-react';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
+import heroCakeVariants from '../assets/images/hero-cake.webp?w=600;900;1200;1600&format=webp&as=metadata';
+import heroPhotoVariants from '../assets/images/hero-photo.webp?w=320;480;640;960&format=webp&as=metadata';
+import { toResponsive } from '../utils/responsiveImage';
+
+const heroCake = toResponsive(heroCakeVariants);
+const heroPhoto = toResponsive(heroPhotoVariants);
 import { foundedYear } from '../constants';
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -92,7 +98,14 @@ const Hero: React.FC = () => {
             <Reveal delay={200} className="relative mx-auto max-w-md lg:ml-auto lg:mr-6">
               <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-soft">
                 <img
-                  src="/torta-1.webp"
+                  src={heroCake.src}
+                  srcSet={heroCake.srcSet}
+                  // Riquadro 4:5 riempito da una foto 3:2: serve una larghezza ~1,9 volte quella del riquadro
+                  sizes="(min-width: 480px) 840px, 175vw"
+                  width={heroCake.width}
+                  height={heroCake.height}
+                  // È la prima immagine grande della pagina: il browser la scarica con priorità
+                  {...{ fetchpriority: 'high' }}
                   alt={t('hero.cakeAlt')}
                   className="h-full w-full object-cover transition-transform duration-[2s] hover:scale-105"
                 />
@@ -100,7 +113,14 @@ const Hero: React.FC = () => {
               </div>
 
               <div className="absolute -bottom-10 -left-6 w-40 overflow-hidden rounded-3xl border-[6px] border-bakery-ivory shadow-soft sm:-left-16 sm:w-52">
-                <img src="/hero-image.webp" alt={t('hero.photoAlt')} className="aspect-square h-full w-full object-cover" />
+                <img
+                  src={heroPhoto.src}
+                  srcSet={heroPhoto.srcSet}
+                  sizes="(min-width: 640px) 312px, 240px"
+                  width={heroPhoto.width}
+                  height={heroPhoto.height}
+                  alt={t('hero.photoAlt')}
+                  className="aspect-square h-full w-full object-cover" />
               </div>
 
               <div className="absolute -right-2 -top-6 sm:-right-10">

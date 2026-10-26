@@ -4,6 +4,10 @@ import Section from '../layout/Section';
 import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
 import { foundedYear } from '../constants';
+import aboutVariants from '../assets/images/about-us.webp?w=800;1200;1600;2304&format=webp&as=metadata';
+import { toResponsive } from '../utils/responsiveImage';
+
+const aboutImage = toResponsive(aboutVariants);
 
 const AboutUs: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +27,12 @@ const AboutUs: React.FC = () => {
           <Reveal className="relative order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-[2.5rem] shadow-soft">
               <img
-                src="/aboutus-image-3.webp"
+                src={aboutImage.src}
+                srcSet={aboutImage.srcSet}
+                // La foto 3:2 riempie un riquadro 4:5 (5:4 da sm a lg): serve più larghezza del riquadro stesso
+                sizes="(min-width: 1536px) 1350px, (min-width: 1280px) 1110px, (min-width: 1024px) 870px, (min-width: 640px) 120vw, 188vw"
+                width={aboutImage.width}
+                height={aboutImage.height}
                 alt={t('about.imageAlt')}
                 className="aspect-[4/5] w-full object-cover object-[65%_center] sm:aspect-[5/4] lg:aspect-[4/5]"
                 loading="lazy"

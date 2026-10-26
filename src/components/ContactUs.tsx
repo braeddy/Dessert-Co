@@ -5,6 +5,10 @@ import Section from '../layout/Section';
 import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
 import { contactInfo } from '../constants';
+import mapVariants from '../assets/images/map.webp?w=640;1280&format=webp&as=metadata';
+import { toResponsive } from '../utils/responsiveImage';
+
+const mapImage = toResponsive(mapVariants);
 
 interface FieldProps {
   id: 'name' | 'email' | 'phone' | 'message';
@@ -221,10 +225,12 @@ const ContactUs: React.FC = () => {
                 className="group absolute inset-0"
               >
                 <img
-                  src="/map.webp"
+                  src={mapImage.src}
+                  srcSet={mapImage.srcSet}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  width={mapImage.width}
+                  height={mapImage.height}
                   alt={t('contact.address')}
-                  width={1280}
-                  height={560}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

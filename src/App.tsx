@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PrivacyPolicy from './pages/PrivacyPolicy';
 import Home from './pages/Home';
+
+// La privacy policy viene scaricata solo quando qualcuno la apre
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,12 +30,15 @@ function App() {
     <div className="min-h-screen overflow-x-clip bg-bakery-ivory font-sans text-bakery-brown">
       <Header scrolled={scrolled} />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          {/* Indirizzi inesistenti (es. la vecchia pagina dei termini) tornano alla home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            {/* La vecchia pagina dei termini torna alla home */}
+            <Route path="/terms-of-service" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </div>
