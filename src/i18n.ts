@@ -11,7 +11,7 @@ const resources = {
         line1: "Cakes that",
         accent: "tell the story",
         line2: "of your moments",
-        badge: "since 2012",
+        badge: "since 2007",
         scroll: "Scroll",
         stat1Label: "years of passion",
         stat2Value: "100%",
@@ -32,7 +32,7 @@ const resources = {
         title: "About Dessert&Co",
         imageAlt: "Cake maker decorating a beautiful cake",
         storyTitle: "Our Sweet Story",
-        storyParagraph1: "Founded with passion by Roberta Rosetti, Dessert&Co has been creating edible works of art in Piombino since 2012. Over the years, we have become a beloved local bakery specializing in custom cakes for all occasions.",
+        storyParagraph1: "Founded with passion by Roberta Rosetti, Dessert&Co has been creating edible works of art in Piombino since 2007. Over the years, we have become a beloved local bakery specializing in custom cakes for all occasions.",
         storyParagraph2: "We believe that every celebration deserves a cake that's not just delicious but also tells your unique story. We combine traditional Italian baking techniques with modern designs to create unique and memorable creations for your special moments.",
         features: {
           love: {
@@ -247,7 +247,7 @@ const resources = {
         line1: "Torte che",
         accent: "raccontano",
         line2: "i tuoi momenti",
-        badge: "dal 2012",
+        badge: "dal 2007",
         scroll: "Scorri",
         stat1Label: "anni di passione",
         stat2Value: "100%",
@@ -268,7 +268,7 @@ const resources = {
         title: "Chi siamo",
         imageAlt: "Pasticcere che decora una torta bellissima",
         storyTitle: "La nostra dolce storia",
-        storyParagraph1: "Fondata con passione da Roberta Rosetti, Dessert&Co crea opere d'arte commestibili a Piombino dal 2012. Nel corso degli anni siamo diventati una pasticceria locale amata, specializzata in torte personalizzate per ogni occasione.",
+        storyParagraph1: "Fondata con passione da Roberta Rosetti, Dessert&Co crea opere d'arte commestibili a Piombino dal 2007. Nel corso degli anni siamo diventati una pasticceria locale amata, specializzata in torte personalizzate per ogni occasione.",
         storyParagraph2: "Crediamo che ogni celebrazione meriti una torta che non sia solo deliziosa ma che racconti anche la tua storia unica. Combiniamo tecniche di pasticceria italiana tradizionale con design moderni per realizzare creazioni uniche e memorabili per i tuoi momenti speciali.",
         features: {
           love: {
@@ -483,7 +483,7 @@ const resources = {
         line1: "Torten, die",
         accent: "Ihre Momente",
         line2: "erzählen",
-        badge: "seit 2012",
+        badge: "seit 2007",
         scroll: "Scrollen",
         stat1Label: "Jahre Leidenschaft",
         stat2Value: "100%",
@@ -504,7 +504,7 @@ const resources = {
         title: "Über Dessert&Co",
         imageAlt: "Konditor dekoriert einen wunderschönen Kuchen",
         storyTitle: "Unsere süße Geschichte",
-        storyParagraph1: "Mit Leidenschaft gegründet von Roberta Rosetti, kreiert Dessert&Co seit 2012 essbare Kunstwerke in Piombino. Im Laufe der Jahre sind wir zu einer beliebten lokalen Bäckerei geworden, die sich auf maßgeschneiderte Kuchen für alle Anlässe spezialisiert hat.",
+        storyParagraph1: "Mit Leidenschaft gegründet von Roberta Rosetti, kreiert Dessert&Co seit 2007 essbare Kunstwerke in Piombino. Im Laufe der Jahre sind wir zu einer beliebten lokalen Bäckerei geworden, die sich auf maßgeschneiderte Kuchen für alle Anlässe spezialisiert hat.",
         storyParagraph2: "Wir glauben, dass jede Feier einen Kuchen verdient, der nicht nur köstlich ist, sondern auch Ihre einzigartige Geschichte erzählt. Wir kombinieren traditionelle italienische Backtechniken mit modernen Designs, um einzigartige und unvergessliche Kreationen für Ihre besonderen Momente zu schaffen.",
         features: {
           love: {

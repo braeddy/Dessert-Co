@@ -96,4 +96,4 @@ export const contactInfo = {
   vatNumber: '01563900495',
 };
 
-export const foundedYear = 2012;
+export const foundedYear = 2007;
