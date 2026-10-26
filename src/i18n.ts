@@ -78,7 +78,7 @@ const resources = {
         hoursTitle: "Opening Hours",
         hours: {
           weekdays: "Tuesday - Saturday",
-          weekdaysTime: "9:00 AM - 12:30 PM / 4:30 PM - 7:00 PM",
+          weekdaysTime: "9:00 AM - 12:30 PM / 4:30 PM - 7:30 PM",
           sunday: "Sunday",
           sundayTime: "9:00 AM - 12:30 PM",
           monday: "Monday",
@@ -314,7 +314,7 @@ const resources = {
         hoursTitle: "Orari di apertura",
         hours: {
           weekdays: "Martedì - Sabato",
-          weekdaysTime: "9:00 - 12:30 / 16:30 - 19:00",
+          weekdaysTime: "9:00 - 12:30 / 16:30 - 19:30",
           sunday: "Domenica",
           sundayTime: "9:00 - 12:30",
           monday: "Lunedì",
@@ -550,7 +550,7 @@ const resources = {
         hoursTitle: "Öffnungszeiten",
         hours: {
           weekdays: "Dienstag - Samstag",
-          weekdaysTime: "9:00 - 12:30 / 16:30 - 19:00",
+          weekdaysTime: "9:00 - 12:30 / 16:30 - 19:30",
           sunday: "Sonntag",
           sundayTime: "9:00 - 12:30",
           monday: "Montag",
