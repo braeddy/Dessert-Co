@@ -20,10 +20,53 @@ const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : us
 
 // Trascinamento orizzontale (px) oltre il quale lo swipe cambia foto
 const SWIPE_THRESHOLD = 50;
+// Trascinamento verso il basso (px) oltre il quale il lightbox si chiude
+const CLOSE_THRESHOLD = 120;
 // Lo stesso per lo swipe a due dita sul trackpad, che ha movimenti più piccoli e rapidi
 const WHEEL_THRESHOLD = 80;
 // Pausa (ms) negli eventi del trackpad dopo la quale il gesto, inerzia compresa, è finito
 const WHEEL_END_DELAY = 150;
+
+// Dopo aver chiuso il lightbox con uno swipe sul trackpad, l'inerzia del gesto continua a
+// inviare eventi per circa un secondo e farebbe scorrere la pagina. Questi eventi vengono
+// ignorati finché si fermano, oppure finché ne arriva uno chiaramente più forte (stesso
+// criterio del carosello): è un nuovo gesto fatto apposta e la pagina torna a scorrere
+const WHEEL_MOMENTUM_MAX = 2000;
+const ignoreWheelMomentum = () => {
+  let peakDelta = 0;
+  let decayed = false;
+  let minDelta = Infinity;
+  let risingEvents = 0;
+  let idleTimer: number | undefined;
+  const stop = () => {
+    window.removeEventListener('wheel', handleWheel);
+    window.clearTimeout(idleTimer);
+    window.clearTimeout(maxTimer);
+  };
+  const handleWheel = (e: WheelEvent) => {
+    const delta = Math.max(Math.abs(e.deltaX), Math.abs(e.deltaY));
+    // Le dita possono essere ancora in movimento: un gesto nuovo si cerca solo dopo che
+    // questo è sceso sotto un terzo del suo massimo
+    if (!decayed) {
+      peakDelta = Math.max(peakDelta, delta);
+      if (delta < peakDelta / 3) decayed = true;
+    } else {
+      minDelta = Math.min(minDelta, delta);
+      risingEvents = delta > Math.max(minDelta * 3, 6) ? risingEvents + 1 : 0;
+      if (risingEvents >= 2) {
+        stop();
+        return;
+      }
+    }
+    e.preventDefault();
+    window.clearTimeout(idleTimer);
+    idleTimer = window.setTimeout(stop, WHEEL_END_DELAY);
+  };
+  window.addEventListener('wheel', handleWheel, { passive: false });
+  idleTimer = window.setTimeout(stop, WHEEL_END_DELAY);
+  // In ogni caso dopo 2 secondi la pagina torna a scorrere normalmente
+  const maxTimer = window.setTimeout(stop, WHEEL_MOMENTUM_MAX);
+};
 
 // Nel lightbox la foto occupa quasi tutta la larghezza dello schermo
 const FULL_SIZES = '100vw';
@@ -132,15 +175,27 @@ const Gallery: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const pendingStep = useRef(0);
 
-  const moveTrack = (x: number, animate: boolean) => {
+  const controlsRef = useRef<HTMLDivElement>(null);
+  const closing = useRef(false);
+
+  // y > 0 sposta la foto verso il basso (swipe per chiudere): la foto si rimpicciolisce un po',
+  // mentre sfondo e pulsanti sfumano lasciando intravedere la pagina
+  const moveTrack = (x: number, animate: boolean, y = 0) => {
     const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = animate ? 'transform 300ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
-    track.style.transform = `translate3d(${x}px, 0, 0)`;
+    const dialog = dialogRef.current;
+    if (!track || !dialog) return;
+    const transition = animate ? '300ms cubic-bezier(0.22, 1, 0.36, 1)' : '0s';
+    const progress = Math.min(y / window.innerHeight, 1);
+    track.style.transition = `transform ${transition}`;
+    track.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${1 - progress * 0.25})`;
+    dialog.style.transition = `background-color ${transition}`;
+    dialog.style.backgroundColor = `rgb(46 32 25 / ${1 - Math.min(progress * 2, 1)})`;
+    if (controlsRef.current) controlsRef.current.style.opacity = y > 0 ? '0' : '';
   };
 
   const closeModal = useCallback(() => {
     pendingStep.current = 0;
+    closing.current = false;
     setSelectedIndex(null);
   }, []);
 
@@ -161,6 +216,10 @@ const Gallery: React.FC = () => {
 
   const handleSlideEnd = (e: React.TransitionEvent) => {
     if (e.target !== e.currentTarget) return;
+    if (closing.current) {
+      closeModal();
+      return;
+    }
     const step = pendingStep.current;
     pendingStep.current = 0;
     if (step !== 0) setSelectedIndex((i) => (i === null ? i : (i + step + total) % total));
@@ -194,23 +253,49 @@ const Gallery: React.FC = () => {
     if (!isOpen || !dialog) return;
     let start: { x: number; y: number } | null = null;
     let deltaX = 0;
+    let deltaY = 0;
+    // Direzione decisa dai primi pixel del gesto: in orizzontale si cambia foto,
+    // verso il basso si chiude. Poi resta quella fino a fine gesto
+    let axis: 'x' | 'y' | null = null;
 
     const handleStart = (e: TouchEvent) => {
-      if (e.touches.length !== 1 || pendingStep.current !== 0) return;
+      if (e.touches.length !== 1 || pendingStep.current !== 0 || closing.current) return;
       start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       deltaX = 0;
+      deltaY = 0;
+      axis = null;
     };
     const handleMove = (e: TouchEvent) => {
       e.preventDefault();
       if (!start || e.touches.length !== 1) return;
       const x = e.touches[0].clientX - start.x;
-      // Un trascinamento soprattutto verticale non sposta le foto
-      deltaX = Math.abs(x) > Math.abs(e.touches[0].clientY - start.y) ? x : 0;
-      moveTrack(deltaX, false);
+      const y = e.touches[0].clientY - start.y;
+      if (!axis) {
+        if (Math.max(Math.abs(x), Math.abs(y)) < 10) return;
+        axis = Math.abs(x) > Math.abs(y) ? 'x' : 'y';
+      }
+      if (axis === 'x') {
+        deltaX = x;
+        moveTrack(deltaX, false);
+      } else {
+        // Verso l'alto non succede nulla
+        deltaY = Math.max(y, 0);
+        moveTrack(0, false, deltaY);
+      }
     };
     const handleEnd = () => {
       if (!start) return;
       start = null;
+      if (axis === 'y') {
+        if (deltaY >= CLOSE_THRESHOLD) {
+          // La foto scende fuori dallo schermo, poi il lightbox si chiude (handleSlideEnd)
+          closing.current = true;
+          moveTrack(0, true, window.innerHeight);
+        } else if (deltaY > 0) {
+          moveTrack(0, true);
+        }
+        return;
+      }
       if (deltaX <= -SWIPE_THRESHOLD) slide(1);
       else if (deltaX >= SWIPE_THRESHOLD) slide(-1);
       else if (deltaX !== 0) {
@@ -219,10 +304,14 @@ const Gallery: React.FC = () => {
       }
     };
 
-    // Swipe a due dita sul trackpad (Mac e Windows): il browser lo invia come rotella
-    // orizzontale. Le foto seguono le dita e, superata la soglia, cambiano subito; il resto
-    // del gesto e l'inerzia vengono ignorati fino all'inizio di uno swipe nuovo
+    // Swipe a due dita sul trackpad (Mac e Windows): il browser lo invia come rotella.
+    // In orizzontale le foto seguono le dita e, superata la soglia, cambiano subito; il resto
+    // del gesto e l'inerzia vengono ignorati fino all'inizio di uno swipe nuovo. In verticale
+    // la foto scende come per lo swipe sul telefono e, superata la soglia, il lightbox si chiude
     let wheelX = 0;
+    let wheelY = 0;
+    // Direzione del gesto, decisa dal primo evento come per il tocco
+    let wheelAxis: 'x' | 'y' | null = null;
     let wheelLocked = false;
     let wheelTimer: number | undefined;
     // Dopo un cambio di foto: spostamento massimo del gesto, minimo raggiunto mentre
@@ -237,9 +326,11 @@ const Gallery: React.FC = () => {
       e.preventDefault();
       window.clearTimeout(wheelTimer);
       wheelTimer = window.setTimeout(() => {
-        // Gesto finito senza cambiare foto: torna al centro
-        if (!wheelLocked && wheelX !== 0) moveTrack(0, true);
+        // Gesto finito senza cambiare foto né chiudere: torna al centro
+        if (!wheelLocked && !closing.current && (wheelX !== 0 || wheelY !== 0)) moveTrack(0, true);
         wheelX = 0;
+        wheelY = 0;
+        wheelAxis = null;
         wheelLocked = false;
       }, WHEEL_END_DELAY);
       if (wheelLocked) {
@@ -247,7 +338,8 @@ const Gallery: React.FC = () => {
         // deve essere sceso sotto un terzo del suo massimo (dita alzate, inerzia che si
         // spegne), poi lo spostamento deve tornare nettamente più grande del minimo per
         // due eventi di fila. Le piccole oscillazioni dell'inerzia non bastano
-        const delta = Math.abs(e.deltaX);
+        // Conta anche il verticale: il gesto nuovo può essere uno swipe per chiudere
+        const delta = Math.max(Math.abs(e.deltaX), Math.abs(e.deltaY));
         if (!decayed) {
           peakDelta = Math.max(peakDelta, delta);
           if (delta < peakDelta / 3) decayed = true;
@@ -258,12 +350,31 @@ const Gallery: React.FC = () => {
         if (risingEvents < 2) return;
         wheelLocked = false;
         wheelX = 0;
+        wheelAxis = null;
       }
-      if (pendingStep.current !== 0) return;
-      // La rotella verticale del mouse non cambia foto
-      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      if (pendingStep.current !== 0 || closing.current) return;
+      if (!wheelAxis) {
+        if (e.deltaX === 0 && e.deltaY === 0) return;
+        wheelAxis = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? 'x' : 'y';
+      }
       // deltaMode 1: valori in righe invece che in pixel (alcuni mouse su Windows)
-      wheelX -= e.deltaX * (e.deltaMode === 1 ? 16 : 1);
+      const scale = e.deltaMode === 1 ? 16 : 1;
+
+      if (wheelAxis === 'y') {
+        // La foto si muove come si muoverebbe la pagina con lo stesso gesto: con lo scorrimento
+        // naturale del Mac le dita verso il basso la portano giù. Verso l'alto non succede nulla
+        wheelY = Math.max(wheelY - e.deltaY * scale, 0);
+        if (wheelY >= CLOSE_THRESHOLD) {
+          closing.current = true;
+          ignoreWheelMomentum();
+          moveTrack(0, true, window.innerHeight);
+        } else {
+          moveTrack(0, false, wheelY);
+        }
+        return;
+      }
+
+      wheelX -= e.deltaX * scale;
       if (Math.abs(wheelX) >= WHEEL_THRESHOLD) {
         wheelLocked = true;
         peakDelta = Math.abs(e.deltaX);
@@ -442,33 +553,36 @@ const Gallery: React.FC = () => {
             })}
           </div>
 
-          <p className="pointer-events-none absolute inset-x-0 bottom-5 text-center text-sm tracking-wider text-white/70">
-            {selectedIndex! + 1} / {total}
-          </p>
+          {/* Pulsanti e contatore: sfumano mentre si trascina la foto verso il basso */}
+          <div ref={controlsRef} className="pointer-events-none absolute inset-0 transition-opacity duration-200 [&>button]:pointer-events-auto">
+            <p className="pointer-events-none absolute inset-x-0 bottom-5 text-center text-sm tracking-wider text-white/70">
+              {selectedIndex! + 1} / {total}
+            </p>
 
-          <button
-            className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-            onClick={closeModal}
-            aria-label={t('gallery.close')}
-          >
-            <X size={22} />
-          </button>
+            <button
+              className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+              onClick={closeModal}
+              aria-label={t('gallery.close')}
+            >
+              <X size={22} />
+            </button>
 
-          <button
-            className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:left-8"
-            onClick={(e) => { e.stopPropagation(); showPrev(); }}
-            aria-label={t('gallery.prev')}
-          >
-            <ChevronLeft size={24} />
-          </button>
+            <button
+              className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:left-8"
+              onClick={(e) => { e.stopPropagation(); showPrev(); }}
+              aria-label={t('gallery.prev')}
+            >
+              <ChevronLeft size={24} />
+            </button>
 
-          <button
-            className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:right-8"
-            onClick={(e) => { e.stopPropagation(); showNext(); }}
-            aria-label={t('gallery.next')}
-          >
-            <ChevronRight size={24} />
-          </button>
+            <button
+              className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:right-8"
+              onClick={(e) => { e.stopPropagation(); showNext(); }}
+              aria-label={t('gallery.next')}
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
       )}
     </Section>
