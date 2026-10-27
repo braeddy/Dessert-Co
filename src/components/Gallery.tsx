@@ -127,7 +127,6 @@ const Gallery: React.FC = () => {
   const { columnCount, isMobile } = useColumnCount();
   const [expanded, setExpanded] = useState(false);
   const [filter, setFilter] = useState<Filter>('all');
-  const gridRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
   const images = useMemo(
@@ -161,11 +160,23 @@ const Gallery: React.FC = () => {
   const altFor = (image: (typeof galleryImages)[number]) =>
     t([`gallery.alts.${image.name}`, `gallery.categoryAlts.${image.category}`]);
 
+  // Richiudendo, la pagina resta in fondo alla galleria: il pulsante rimane nello stesso punto
+  // dello schermo e sopra compaiono le ultime foto dell'anteprima. Prima la galleria si
+  // richiude, poi (prima che il browser disegni) la pagina si sposta della differenza.
+  // Uno scroll animato avviato prima di richiuderla si perdeva mentre la pagina si accorciava
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const toggleTopBeforeCollapse = useRef<number | null>(null);
   const toggleExpanded = () => {
-    // Richiudendo, riporta l'utente all'inizio della galleria
-    if (expanded) gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (expanded && toggleRef.current) toggleTopBeforeCollapse.current = toggleRef.current.getBoundingClientRect().top;
     setExpanded(!expanded);
   };
+  useIsomorphicLayoutEffect(() => {
+    const toggle = toggleRef.current;
+    if (expanded || toggleTopBeforeCollapse.current === null || !toggle) return;
+    const shift = toggle.getBoundingClientRect().top - toggleTopBeforeCollapse.current;
+    window.scrollTo({ top: window.scrollY + shift, behavior: 'instant' });
+    toggleTopBeforeCollapse.current = null;
+  }, [expanded]);
 
   // Carosello del lightbox: la foto precedente e la successiva stanno ai lati di quella aperta.
   // Le tre foto si spostano insieme: seguono il dito durante lo swipe e, per cambiare foto,
@@ -455,7 +466,7 @@ const Gallery: React.FC = () => {
         )}
 
         {/* Griglia masonry */}
-        <div ref={gridRef} className="relative flex scroll-mt-28 gap-3 sm:gap-5">
+        <div className="relative flex gap-3 sm:gap-5">
           {columns.map((column, colIndex) => (
             <div key={colIndex} className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-5">
               {column.map((index, rowIndex) => {
@@ -495,7 +506,7 @@ const Gallery: React.FC = () => {
 
         {collapsible && (
           <div className="mt-6 flex justify-center">
-            <button onClick={toggleExpanded} aria-expanded={expanded} className="btn-primary">
+            <button ref={toggleRef} onClick={toggleExpanded} aria-expanded={expanded} className="btn-primary">
               {expanded ? t('gallery.showLess') : t('gallery.showAll', { count: total })}
               <ChevronDown size={16} className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
             </button>
