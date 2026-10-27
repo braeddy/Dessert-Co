@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Plus, X, ArrowRight } from 'lucide-react';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
+import Process from './Process';
+import CallToAction from './CallToAction';
 import { useTranslation } from 'react-i18next';
 import weddingsImage from '../assets/images/service-weddings.webp?w=600;900;1200;1600&format=webp&as=metadata';
 import birthdaysImage from '../assets/images/service-birthdays.webp?w=600;900;1200;1600&format=webp&as=metadata';
@@ -50,15 +53,7 @@ const Services: React.FC = () => {
   return (
     <Section id="services" className="relative bg-white py-24 md:py-32">
       <div className="container mx-auto">
-        <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <Reveal className="max-w-2xl">
-            <span className="eyebrow">{t('services.eyebrow')}</span>
-            <h2 className="section-title mt-5">{t('services.title')}</h2>
-          </Reveal>
-          <Reveal delay={100} className="max-w-md">
-            <p className="leading-relaxed text-bakery-brown/75">{t('services.description')}</p>
-          </Reveal>
-        </div>
+        <SectionHeader eyebrow={t('header.services')} title={t('services.title')} description={t('services.description')} />
 
         <div className="grid gap-5 md:grid-cols-3">
           {services.map(({ key, image }, index) => {
@@ -149,6 +144,9 @@ const Services: React.FC = () => {
             );
           })}
         </div>
+
+        <Process />
+        <CallToAction />
       </div>
     </Section>
   );

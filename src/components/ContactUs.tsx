@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Send, Clock, CheckCircle2, AlertCircle, Navigation
 import { Link } from 'react-router-dom';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 import { useTranslation } from 'react-i18next';
 import { contactInfo } from '../constants';
 import mapVariants from '../assets/images/map.webp?w=640;1280&format=webp&as=metadata';
@@ -119,16 +120,12 @@ const ContactUs: React.FC = () => {
       <div className="pointer-events-none absolute -left-16 top-[calc(33%-4rem)] -z-10 h-[32rem] w-[32rem] bg-[radial-gradient(closest-side,rgb(246_214_218/0.5),rgb(246_214_218/0))]" />
 
       <div className="container mx-auto">
-        <Reveal className="mx-auto mb-16 max-w-2xl text-center">
-          <span className="eyebrow">{t('contact.eyebrow')}</span>
-          <h2 className="section-title mt-5">{t('contact.title')}</h2>
-          <p className="mt-5 leading-relaxed text-bakery-brown/75">{t('contact.description')}</p>
-        </Reveal>
+        <SectionHeader eyebrow={t('header.contact')} title={t('contact.title')} description={t('contact.description')} />
 
         <div className="grid gap-6 lg:grid-cols-5 lg:items-start">
           {/* Modulo */}
           <Reveal className="lg:col-span-3">
-            <div className="rounded-[2rem] border border-bakery-brown/10 bg-white p-6 shadow-soft md:p-10">
+            <div id="contact-form" className="scroll-mt-28 rounded-[2rem] border border-bakery-brown/10 bg-white p-6 shadow-soft md:p-10">
               <h3 className="font-serif text-3xl font-medium text-bakery-cocoa">{t('contact.formTitle')}</h3>
 
               {submitted ? (

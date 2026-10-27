@@ -56,7 +56,8 @@ const AboutUs: React.FC = () => {
           {/* Testo */}
           <div className="order-1 lg:order-2">
             <Reveal>
-              <span className="eyebrow">{t('about.eyebrow')}</span>
+              {/* L'etichetta è il nome della sezione nel menu, così i due coincidono sempre */}
+              <span className="eyebrow">{t('header.about')}</span>
               <h2 className="section-title mt-5">{t('about.storyTitle')}</h2>
             </Reveal>
             <Reveal delay={100}>
@@ -66,16 +67,16 @@ const AboutUs: React.FC = () => {
 
             <div className="mt-12 grid gap-4 sm:grid-cols-3">
               {features.map(({ key, icon: Icon, color }, index) => (
-                <Reveal
-                  key={key}
-                  delay={150 + index * 100}
-                  className="group rounded-3xl border border-bakery-brown/10 bg-white/70 p-5 transition-all duration-500 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
-                >
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-2xl ${color} transition-transform duration-500 group-hover:rotate-6`}>
-                    <Icon className="text-bakery-cocoa" size={20} />
+                // La card è dentro Reveal e non è Reveal stessa: il ritardo della comparsa a
+                // cascata altrimenti si applicherebbe anche all'hover, che partirebbe in ritardo
+                <Reveal key={key} delay={150 + index * 100}>
+                  <div className="group h-full rounded-3xl border border-bakery-brown/10 bg-white/70 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft">
+                    <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-2xl ${color} transition-transform duration-300 group-hover:rotate-6`}>
+                      <Icon className="text-bakery-cocoa" size={20} />
+                    </div>
+                    <h3 className="font-serif text-lg font-medium text-bakery-cocoa">{t(`about.features.${key}.title`)}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-bakery-brown/70">{t(`about.features.${key}.description`)}</p>
                   </div>
-                  <h3 className="font-serif text-lg font-medium text-bakery-cocoa">{t(`about.features.${key}.title`)}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-bakery-brown/70">{t(`about.features.${key}.description`)}</p>
                 </Reveal>
               ))}
             </div>

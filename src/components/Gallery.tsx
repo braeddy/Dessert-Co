@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 import { X, ChevronLeft, ChevronRight, Instagram, Expand, ChevronDown } from 'lucide-react';
 import { galleryImages, galleryCategories, contactInfo, type GalleryCategory, type GalleryImage } from '../constants';
 import { useTranslation } from 'react-i18next';
@@ -424,15 +425,7 @@ const Gallery: React.FC = () => {
   return (
     <Section id="gallery" className="relative bg-bakery-cream/40 py-24 md:py-32">
       <div className="container mx-auto">
-        <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <Reveal className="max-w-2xl">
-            <span className="eyebrow">{t('gallery.eyebrow')}</span>
-            <h2 className="section-title mt-5">{t('gallery.title')}</h2>
-          </Reveal>
-          <Reveal delay={100} className="max-w-md">
-            <p className="leading-relaxed text-bakery-brown/75">{t('gallery.description')}</p>
-          </Reveal>
-        </div>
+        <SectionHeader eyebrow={t('header.gallery')} title={t('gallery.title')} description={t('gallery.description')} />
 
         {/* Filtri per occasione */}
         {availableCategories.length > 1 && (

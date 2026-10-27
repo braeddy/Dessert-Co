@@ -20,7 +20,6 @@ const translation = {
     contact: "Kontaktieren Sie uns",
   },
   about: {
-    eyebrow: "Unsere Geschichte",
     quote: "Jede Torte ist eine Erinnerung, die man schmecken kann.",
     signature: "Roberta Rosetti",
     yearsLabel: "Jahre in Piombino",
@@ -45,7 +44,6 @@ const translation = {
     },
   },
   contact: {
-    eyebrow: "Kontakt",
     directions: "Route planen",
     privacyNote: "Mit dem Absenden des Formulars akzeptieren Sie unsere",
     privacyLink: "Datenschutzrichtlinie",
@@ -81,7 +79,6 @@ const translation = {
     },
   },
   gallery: {
-    eyebrow: "Portfolio",
     close: "Schließen",
     prev: "Vorheriges Bild",
     next: "Nächstes Bild",
@@ -106,7 +103,6 @@ const translation = {
     alts: {},
   },
   services: {
-    eyebrow: "Was wir kreieren",
     title: "Eine Torte für jeden Anlass",
     description: "Von spektakulären Hochzeitstorten bis zu köstlichen Geburtstagstorten: Jede Kreation entsteht ganz nach Ihren Wünschen.",
     more: "Mehr erfahren",
@@ -159,7 +155,7 @@ const translation = {
   header: {
     language: "Sprache",
     cta: "Angebot anfragen",
-    services: "Leistungen",
+    services: "Was wir machen",
     home: "Startseite",
     about: "Über uns",
     gallery: "Galerie",

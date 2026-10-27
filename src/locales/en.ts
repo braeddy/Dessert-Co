@@ -20,7 +20,6 @@ const translation = {
     contact: "Contact Us",
   },
   about: {
-    eyebrow: "Our story",
     quote: "Every cake is a memory you can taste.",
     signature: "Roberta Rosetti",
     yearsLabel: "years in Piombino",
@@ -45,7 +44,6 @@ const translation = {
     },
   },
   contact: {
-    eyebrow: "Contact",
     directions: "Get directions",
     privacyNote: "By submitting this form you accept our",
     privacyLink: "privacy policy",
@@ -81,7 +79,6 @@ const translation = {
     },
   },
   gallery: {
-    eyebrow: "Portfolio",
     close: "Close",
     prev: "Previous image",
     next: "Next image",
@@ -106,7 +103,6 @@ const translation = {
     alts: {},
   },
   services: {
-    eyebrow: "What we create",
     title: "A cake for every occasion",
     description: "From show-stopping wedding cakes to the most indulgent birthday cakes: every creation is made just for you.",
     more: "Learn more",
@@ -159,7 +155,7 @@ const translation = {
   header: {
     language: "Language",
     cta: "Get a quote",
-    services: "Services",
+    services: "What we do",
     home: "Home",
     about: "About Us",
     gallery: "Gallery",

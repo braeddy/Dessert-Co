@@ -5,8 +5,6 @@ import Marquee from '../components/Marquee';
 import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
 import Gallery from '../components/Gallery';
-import Process from '../components/Process';
-import CallToAction from '../components/CallToAction';
 import ContactUs from '../components/ContactUs';
 
 const Home: React.FC = () => {
@@ -29,8 +27,6 @@ const Home: React.FC = () => {
       <AboutUs />
       <Services />
       <Gallery />
-      <Process />
-      <CallToAction />
       <ContactUs />
     </>
   );
