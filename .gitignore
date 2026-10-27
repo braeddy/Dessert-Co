@@ -28,3 +28,9 @@ dist-ssr
 # Cache di TypeScript e configurazione dell'editor Cursor
 *.tsbuildinfo
 .cursor/
+
+# Stato locale di oh-my-claudecode (sessioni, HUD, log)
+.omc/
+
+# Impostazioni locali di Claude Code
+.claude/
