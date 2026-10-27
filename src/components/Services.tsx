@@ -115,9 +115,12 @@ const Services: React.FC = () => {
                       if (el) el.inert = !isOpen;
                     }}
                     aria-hidden={!isOpen}
+                    // Toccando un punto qualsiasi del dettaglio la card si richiude, come si è aperta;
+                    // da tastiera restano il pulsante X ed Esc
+                    onClick={() => setOpenKey(null)}
                     // Niente backdrop-blur: su Safari mobile rende lenta l'apertura, mentre la
                     // foto sotto si ingrandisce. Lo sfondo più coprente tiene leggibile il testo
-                    className={`absolute inset-0 flex flex-col gap-4 bg-bakery-cocoa/95 p-6 text-white transition-[opacity,transform] duration-500 md:p-7 ${
+                    className={`absolute inset-0 flex cursor-pointer flex-col gap-4 bg-bakery-cocoa/95 p-6 text-white transition-[opacity,transform] duration-500 md:p-7 ${
                       isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0'
                     }`}
                   >
