@@ -111,7 +111,7 @@ const ContactUs: React.FC = () => {
 
   return (
     <Section id="contact" className="relative py-24 md:py-32">
-      <div className="pointer-events-none absolute left-0 top-1/3 -z-10 h-96 w-96 rounded-full bg-bakery-pink/50 blur-3xl" />
+      <div className="pointer-events-none absolute -left-16 top-[calc(33%-4rem)] -z-10 h-[32rem] w-[32rem] bg-[radial-gradient(closest-side,rgb(246_214_218/0.5),rgb(246_214_218/0))]" />
 
       <div className="container mx-auto">
         <Reveal className="mx-auto mb-16 max-w-2xl text-center">

@@ -35,9 +35,11 @@ const Hero: React.FC = () => {
   return (
     <Section id="home" className="relative overflow-hidden pb-16 pt-32 md:pt-40 lg:min-h-screen lg:pb-24">
       {/* Sfondo decorativo */}
+      {/* Macchie di colore fatte con gradienti e non con filter: blur, che su Safari mobile
+          rende lentissimi i ridisegni della pagina (es. all'apertura del menu) */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 top-10 h-[28rem] w-[28rem] rounded-full bg-bakery-pink/60 blur-3xl" />
-        <div className="absolute -right-32 top-1/3 h-[26rem] w-[26rem] rounded-full bg-bakery-blue/40 blur-3xl" />
+        <div className="absolute -left-56 -top-6 h-[36rem] w-[36rem] bg-[radial-gradient(closest-side,rgb(246_214_218/0.6),rgb(246_214_218/0))]" />
+        <div className="absolute -right-48 top-[calc(33%-4rem)] h-[34rem] w-[34rem] bg-[radial-gradient(closest-side,rgb(166_213_233/0.4),rgb(166_213_233/0))]" />
         <div className="bg-grain absolute inset-0 opacity-60" />
       </div>
 

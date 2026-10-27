@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative overflow-hidden bg-bakery-cocoa text-white">
-      <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-bakery-rose/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-48 -top-48 h-[32rem] w-[32rem] bg-[radial-gradient(closest-side,rgb(216_121_138/0.2),rgb(216_121_138/0))]" />
 
       <div className="container relative mx-auto px-4 pb-10 pt-20">
         <div className="grid gap-12 md:grid-cols-12">

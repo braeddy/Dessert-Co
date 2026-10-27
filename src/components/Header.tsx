@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -86,6 +86,8 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('home');
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -109,12 +111,20 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     return () => observer.disconnect();
   }, [isHome]);
 
-  // Blocca lo scroll della pagina con il menu mobile aperto (su iPhone serve anche su <html>,
-  // altrimenti la pagina sotto scorre e la barra degli indirizzi sposta il menu)
+  // Da chiuso i pulsanti del menu non devono ricevere focus né tocchi
   useEffect(() => {
-    const value = mobileMenuOpen ? 'hidden' : '';
-    document.documentElement.style.overflow = value;
-    document.body.style.overflow = value;
+    if (mobileMenuRef.current) mobileMenuRef.current.inert = !mobileMenuOpen;
+  }, [mobileMenuOpen]);
+
+  // Blocca lo scroll della pagina sotto il menu mobile annullando il trascinamento sul menu
+  // e sulla barra che gli sta sopra. Non usiamo overflow: hidden su <html>/<body>: su iPhone
+  // costringe Safari a ridisegnare tutta la pagina e il menu si apre con secondi di ritardo
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header || !mobileMenuOpen) return;
+    const preventScroll = (e: TouchEvent) => e.preventDefault();
+    header.addEventListener('touchmove', preventScroll, { passive: false });
+    return () => header.removeEventListener('touchmove', preventScroll);
   }, [mobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
@@ -128,15 +138,19 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   };
 
   const solid = scrolled || !isHome;
+  // Spaziature della barra, condivise col menu mobile così logo e pulsante non si spostano
+  const barPadding = solid ? 'py-2 pl-3 pr-2' : 'py-3 pl-1 pr-1';
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6">
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6">
+      {/* La barra sta sopra al menu mobile, così il pulsante è uno solo e si trasforma in X;
+          con il menu aperto perde lo sfondo a pillola e restano solo logo e pulsante */}
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full transition-all duration-500 ${
-          solid
-            ? 'border border-white/60 bg-white/75 py-2 pl-3 pr-2 shadow-soft backdrop-blur-xl'
-            : 'border border-transparent bg-transparent py-3 pl-1 pr-1'
-        }`}
+        className={`relative z-[60] mx-auto flex max-w-7xl items-center justify-between rounded-full transition-all duration-500 ${
+          solid && !mobileMenuOpen
+            ? 'border border-white/60 bg-white/75 shadow-soft backdrop-blur-xl'
+            : 'border border-transparent bg-transparent'
+        } ${barPadding}`}
       >
         <button onClick={() => scrollToSection('home')} className="flex items-center gap-3" aria-label="Dessert&Co - Home">
           <Logo size={solid ? 'small' : 'large'} />
@@ -180,23 +194,42 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             <ArrowUpRight size={16} />
           </button>
 
-          {/* Pulsante menu mobile */}
+          {/* Pulsante menu mobile: le tre linee ruotano e diventano una X */}
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-bakery-cocoa text-white lg:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label={t('header.openMenu', 'Menu')}
+            className="relative flex h-11 w-11 items-center justify-center rounded-full bg-bakery-cocoa text-white lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? t('header.closeMenu', 'Close') : t('header.openMenu', 'Menu')}
           >
-            <Menu size={20} />
+            <span
+              className={`absolute h-0.5 w-[18px] rounded-full bg-current transition-transform duration-300 ${
+                mobileMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+              }`}
+            />
+            <span
+              className={`absolute h-0.5 w-[18px] rounded-full bg-current transition-opacity duration-200 ${
+                mobileMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span
+              className={`absolute h-0.5 w-[18px] rounded-full bg-current transition-transform duration-300 ${
+                mobileMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+              }`}
+            />
           </button>
         </div>
       </div>
 
       {/* Menu mobile */}
       {/* Le sfumature rosa e azzurra sono gradienti dello sfondo e non elementi con filter: blur,
-          che su Safari mobile sfarfallano o si ritagliano mentre i pulsanti si animano */}
+          che su Safari mobile sfarfallano o si ritagliano mentre i pulsanti si animano.
+          Da chiuso il menu è nascosto con inert e non con visibility: hidden, perché Safari
+          non anima gli elementi che partono invisibili e il menu comparirebbe a scatti */}
       <div
-        className={`fixed inset-0 z-50 flex flex-col overflow-hidden overscroll-none transition-all duration-500 lg:hidden ${
-          mobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        ref={mobileMenuRef}
+        aria-hidden={!mobileMenuOpen}
+        className={`fixed inset-0 z-50 flex flex-col overflow-hidden overscroll-none transition-opacity duration-500 lg:hidden ${
+          mobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         style={{
           background: [
@@ -207,22 +240,18 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         }}
       >
 
-        <div className="relative flex items-center justify-between px-5 pt-5">
-          <Logo size="small" />
-          <button
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-bakery-cocoa text-white"
-            aria-label={t('header.closeMenu', 'Close')}
-          >
-            <X size={20} />
-          </button>
+        {/* Spazio occupato dalla barra dell'header, che resta visibile sopra al menu */}
+        <div aria-hidden="true" className="invisible px-3 pt-3 md:px-6">
+          <div className={`flex border border-transparent ${barPadding}`}>
+            <Logo size={solid ? 'small' : 'large'} />
+          </div>
         </div>
 
         <ul className="relative mt-10 flex flex-1 flex-col gap-2 px-8">
           {navSections.map((id, index) => (
             <li
               key={id}
-              className={`transition-all duration-500 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+              className={`transition-[opacity,transform] duration-500 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
               style={{ transitionDelay: mobileMenuOpen ? `${120 + index * 60}ms` : '0ms' }}
             >
               <button
