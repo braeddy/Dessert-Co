@@ -61,6 +61,7 @@ const translation = {
       sending: "Sending...",
     },
     successMessage: "Thank you for your message! We'll get back to you soon.",
+    rateLimitMessage: "You've sent several messages in a short time. Please try again in a few minutes or contact us by phone or email.",
     errorMessage: "We couldn't send your message. Please try again or contact us by phone or email.",
     visitTitle: "Visit Us",
     addressTitle: "Address",

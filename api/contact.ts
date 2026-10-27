@@ -21,6 +21,41 @@ const escapeHtml = (value: string) =>
 
 const asString = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
 
+// Limite di invii per indirizzo IP, contro chi usa il modulo per riempire la casella di posta.
+// Il conteggio è in memoria: vale per la singola istanza della funzione e si azzera quando
+// Vercel la riavvia, quindi ferma gli invii a raffica ma non è un limite garantito
+const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 };
+const recentRequests = new Map<string, number[]>();
+
+// Restituisce i secondi da attendere se l'IP ha superato il limite, altrimenti registra l'invio
+const checkRateLimit = (ip: string): number | null => {
+  const now = Date.now();
+  const since = now - RATE_LIMIT.windowMs;
+
+  // Ogni tanto elimina gli IP senza invii recenti, così la memoria non cresce all'infinito
+  if (recentRequests.size > 1000) {
+    for (const [key, times] of recentRequests) {
+      if (times[times.length - 1] <= since) recentRequests.delete(key);
+    }
+  }
+
+  const times = (recentRequests.get(ip) ?? []).filter((time) => time > since);
+  if (times.length >= RATE_LIMIT.max) {
+    recentRequests.set(ip, times);
+    return Math.ceil((times[0] + RATE_LIMIT.windowMs - now) / 1000);
+  }
+  times.push(now);
+  recentRequests.set(ip, times);
+  return null;
+};
+
+// Su Vercel x-real-ip e x-forwarded-for sono impostati dalla piattaforma con l'IP del visitatore
+const clientIp = (req: VercelRequest) => {
+  const header = req.headers['x-real-ip'] ?? req.headers['x-forwarded-for'];
+  const value = Array.isArray(header) ? header[0] : header;
+  return value?.split(',')[0].trim() || req.socket?.remoteAddress || 'unknown';
+};
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -30,6 +65,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!RESEND_API_KEY || !EMAIL_TO) {
     console.error('Configurazione mancante: impostare RESEND_API_KEY ed EMAIL_TO');
     return res.status(500).json({ message: 'Server not configured' });
+  }
+
+  const retryAfter = checkRateLimit(clientIp(req));
+  if (retryAfter !== null) {
+    res.setHeader('Retry-After', String(retryAfter));
+    return res.status(429).json({ message: 'Too many requests' });
   }
 
   const body = (req.body ?? {}) as Record<string, unknown>;

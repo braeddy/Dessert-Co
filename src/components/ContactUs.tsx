@@ -78,6 +78,11 @@ const ContactUs: React.FC = () => {
         body: JSON.stringify({ ...formData, website: honeypot }),
       });
 
+      // Troppi messaggi dallo stesso indirizzo in poco tempo (limite del server)
+      if (response.status === 429) {
+        setError(t('contact.rateLimitMessage'));
+        return;
+      }
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
       }

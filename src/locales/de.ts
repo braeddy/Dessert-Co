@@ -61,6 +61,7 @@ const translation = {
       sending: "Senden...",
     },
     successMessage: "Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.",
+    rateLimitMessage: "Sie haben in kurzer Zeit mehrere Nachrichten gesendet. Bitte versuchen Sie es in einigen Minuten erneut oder kontaktieren Sie uns telefonisch oder per E-Mail.",
     errorMessage: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch oder per E-Mail.",
     visitTitle: "Besuchen Sie uns",
     addressTitle: "Adresse",

@@ -61,6 +61,7 @@ const translation = {
       sending: "Invio in corso...",
     },
     successMessage: "Grazie per il tuo messaggio! Ti risponderemo al più presto.",
+    rateLimitMessage: "Hai inviato diversi messaggi in poco tempo. Riprova tra qualche minuto oppure contattaci per telefono o email.",
     errorMessage: "Non siamo riusciti a inviare il messaggio. Riprova oppure contattaci per telefono o email.",
     visitTitle: "Vieni a trovarci",
     addressTitle: "Indirizzo",
