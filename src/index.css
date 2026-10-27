@@ -62,6 +62,18 @@
     opacity: 1;
     transform: none;
   }
+
+  /* Stessa comparsa, ma all'apertura della pagina e solo con CSS (vedi Reveal immediate) */
+  .reveal-immediate {
+    animation: reveal-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms) both;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
 }
 
 @keyframes float {
@@ -77,6 +89,9 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .reveal-immediate {
+    animation: none;
   }
   .animate-float,
   .animate-marquee,

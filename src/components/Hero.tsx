@@ -46,11 +46,11 @@ const Hero: React.FC = () => {
       <div className="container mx-auto">
         <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
-            <Reveal>
+            <Reveal immediate>
               <span className="eyebrow">{t('hero.eyebrow')}</span>
             </Reveal>
 
-            <Reveal delay={100}>
+            <Reveal immediate delay={100}>
               <h1 className="mt-6 font-serif text-5xl font-medium leading-[0.98] tracking-tight text-bakery-cocoa sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
                 {t('hero.line1')}{' '}
                 <em className="font-light italic text-bakery-rose">{t('hero.accent')}</em>{' '}
@@ -58,13 +58,13 @@ const Hero: React.FC = () => {
               </h1>
             </Reveal>
 
-            <Reveal delay={200}>
+            <Reveal immediate delay={200}>
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-bakery-brown/80">
                 {t('hero.description')}
               </p>
             </Reveal>
 
-            <Reveal delay={300} className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Reveal immediate delay={300} className="mt-10 flex flex-col gap-3 sm:flex-row">
               <button onClick={() => scrollTo('gallery')} className="btn-primary group">
                 {t('hero.creations')}
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
               </button>
             </Reveal>
 
-            <Reveal delay={400}>
+            <Reveal immediate delay={400}>
               <dl className="mt-14 grid max-w-lg grid-cols-3 divide-x divide-bakery-brown/10 border-t border-bakery-brown/10 pt-8">
                 <div className="pr-4">
                   <dt className="sr-only">{t('hero.stat1Label')}</dt>
@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
 
           {/* Collage di immagini */}
           <div className="relative lg:col-span-6">
-            <Reveal delay={200} className="relative mx-auto max-w-md lg:ml-auto lg:mr-6">
+            <Reveal immediate delay={200} className="relative mx-auto max-w-md lg:ml-auto lg:mr-6">
               <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-soft">
                 <img
                   src={heroCake.src}

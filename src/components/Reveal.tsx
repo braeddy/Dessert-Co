@@ -5,16 +5,19 @@ interface RevealProps {
   className?: string;
   delay?: number;
   as?: keyof JSX.IntrinsicElements;
+  // Per i contenuti visibili all'apertura della pagina: la dissolvenza parte subito via CSS,
+  // senza aspettare JavaScript, traduzioni e React, che sui telefoni lenti la ritardavano
+  immediate?: boolean;
 }
 
 // Mostra il contenuto con una dissolvenza quando entra nel viewport
-const Reveal: React.FC<RevealProps> = ({ children, className = '', delay = 0, as = 'div' }) => {
+const Reveal: React.FC<RevealProps> = ({ children, className = '', delay = 0, as = 'div', immediate = false }) => {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || immediate) return;
 
     if (!('IntersectionObserver' in window)) {
       setVisible(true);
@@ -33,14 +36,14 @@ const Reveal: React.FC<RevealProps> = ({ children, className = '', delay = 0, as
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, []);
+  }, [immediate]);
 
   const Tag = as as React.ElementType;
 
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
+      className={`${immediate ? 'reveal-immediate' : `reveal ${visible ? 'is-visible' : ''}`} ${className}`}
       style={{ '--reveal-delay': `${delay}ms` } as React.CSSProperties}
     >
       {children}
