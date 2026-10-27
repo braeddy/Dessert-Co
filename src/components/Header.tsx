@@ -4,6 +4,7 @@ import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { navSections } from '../constants';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface HeaderProps {
   scrolled: boolean;
@@ -116,6 +117,18 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     if (mobileMenuRef.current) mobileMenuRef.current.inert = !mobileMenuOpen;
   }, [mobileMenuOpen]);
 
+  // Con il menu mobile aperto il tasto Tab gira tra barra e menu senza finire sulla pagina
+  // sotto, Esc lo chiude e alla chiusura il focus torna sul pulsante del menu
+  useFocusTrap(mobileMenuOpen, headerRef);
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [mobileMenuOpen]);
+
   // Blocca lo scroll della pagina sotto il menu mobile annullando il trascinamento sul menu
   // e sulla barra che gli sta sopra. Non usiamo overflow: hidden su <html>/<body>: su iPhone
   // costringe Safari a ridisegnare tutta la pagina e il menu si apre con secondi di ritardo
@@ -189,7 +202,15 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <div className="hidden lg:block">
             <LanguageSwitcher />
           </div>
-          <button onClick={() => scrollToSection('contact')} className="btn-primary hidden !px-5 !py-2.5 md:inline-flex">
+          {/* Con il menu aperto (tablet) sparisce: lo stesso pulsante è già in fondo al menu */}
+          <button
+            onClick={() => scrollToSection('contact')}
+            tabIndex={mobileMenuOpen ? -1 : undefined}
+            aria-hidden={mobileMenuOpen || undefined}
+            className={`btn-primary hidden !px-5 !py-2.5 md:inline-flex ${
+              mobileMenuOpen ? 'pointer-events-none opacity-0 lg:pointer-events-auto lg:opacity-100' : ''
+            }`}
+          >
             {t('header.cta')}
             <ArrowUpRight size={16} />
           </button>

@@ -89,7 +89,7 @@ const Services: React.FC = () => {
                     aria-controls={panelId}
                     className="absolute inset-0 flex flex-col justify-between p-6 text-left text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-bakery-rose"
                   >
-                    <span className="self-start rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur-md">
+                    <span className="self-start rounded-full bg-bakery-cocoa/40 px-3 py-1 text-xs font-semibold">
                       0{index + 1}
                     </span>
                     <span>
@@ -109,12 +109,16 @@ const Services: React.FC = () => {
                     id={panelId}
                     role="region"
                     aria-label={t(`services.items.${key}.title`)}
-                    // Aprendo, il pannello diventa subito visibile (così può ricevere il focus);
-                    // chiudendo, sparisce solo alla fine della dissolvenza
-                    className={`absolute inset-0 flex flex-col gap-4 bg-bakery-cocoa/90 p-6 text-white backdrop-blur-sm md:p-7 ${
-                      isOpen
-                        ? 'visible translate-y-0 opacity-100 [transition:opacity_500ms,transform_500ms,visibility_0s]'
-                        : 'invisible translate-y-6 opacity-0 [transition:opacity_500ms,transform_500ms,visibility_0s_500ms]'
+                    ref={(el) => {
+                      // Chiuso, il pannello non riceve focus né tocchi. Non usiamo visibility: hidden
+                      // perché Safari non anima gli elementi che partono invisibili
+                      if (el) el.inert = !isOpen;
+                    }}
+                    aria-hidden={!isOpen}
+                    // Niente backdrop-blur: su Safari mobile rende lenta l'apertura, mentre la
+                    // foto sotto si ingrandisce. Lo sfondo più coprente tiene leggibile il testo
+                    className={`absolute inset-0 flex flex-col gap-4 bg-bakery-cocoa/95 p-6 text-white transition-[opacity,transform] duration-500 md:p-7 ${
+                      isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
