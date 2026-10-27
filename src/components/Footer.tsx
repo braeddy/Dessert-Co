@@ -57,7 +57,11 @@ const Footer: React.FC = () => {
           <div className="md:col-span-4">
             <h4 className="text-xs font-semibold uppercase tracking-[0.25em] text-bakery-pink">{t('footer.contactTitle')}</h4>
             <ul className="mt-6 space-y-3 text-white/75">
-              <li>{t('contact.address')}</li>
+              <li>
+                <a href={contactInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+                  {t('contact.address')}
+                </a>
+              </li>
               <li>
                 <a href={contactInfo.phoneHref} className="transition-colors hover:text-white">{t('contact.phone')}</a>
               </li>
