@@ -3,7 +3,8 @@ import type { ImageMetadata } from '../utils/responsiveImage';
 // Galleria: ogni sottocartella di src/assets/gallery è una categoria.
 // Per aggiungere una foto basta copiarla nella cartella giusta (jpg, png o webp):
 // in fase di build viene convertita in WebP: miniature da 400/600/800px per la griglia
-// (il browser sceglie la più adatta allo schermo) e una versione da 1800px per il lightbox.
+// (il browser sceglie la più adatta allo schermo) e versioni da 1200/1800px per il lightbox
+// (1200px bastano a un telefono e si decodificano molto più in fretta).
 // L'ordine segue il nome del file; un prefisso numerico ("01-") serve solo a ordinarle.
 export const galleryCategories = ['matrimoni', 'compleanni', 'eventi'] as const;
 export type GalleryCategory = (typeof galleryCategories)[number];
@@ -12,6 +13,7 @@ export interface GalleryImage {
   thumb: string;
   thumbSrcSet: string;
   full: string;
+  fullSrcSet: string;
   width: number;
   height: number;
   category: GalleryCategory;
@@ -35,6 +37,11 @@ const fulls = import.meta.glob<string>('../assets/gallery/*/*.{jpg,jpeg,png,webp
   import: 'default',
   query: { w: '1800', format: 'webp' },
 });
+const fullSrcSets = import.meta.glob<string>('../assets/gallery/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+  eager: true,
+  import: 'default',
+  query: { w: '1200;1800', format: 'webp', as: 'srcset' },
+});
 
 const sortedImages: GalleryImage[] = Object.entries(thumbs)
   .map(([path, meta]) => {
@@ -43,6 +50,7 @@ const sortedImages: GalleryImage[] = Object.entries(thumbs)
       thumb: meta.src,
       thumbSrcSet: thumbSrcSets[path],
       full: fulls[path],
+      fullSrcSet: fullSrcSets[path],
       width: meta.width,
       height: meta.height,
       category: category as GalleryCategory,
