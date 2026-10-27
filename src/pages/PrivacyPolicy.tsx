@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Section from '../layout/Section';
+import { siteTitle } from '../constants';
 
 const headingClass = 'font-serif text-2xl font-semibold mt-8 mb-4 text-bakery-brown';
 
 const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation();
+
+  // Titolo della scheda del browser dedicato; uscendo dalla pagina torna quello del sito
+  useEffect(() => {
+    document.title = t('privacy.metaTitle');
+    return () => {
+      document.title = siteTitle;
+    };
+  }, [t]);
 
   const list = (prefix: string, count: number) => (
     <ul className="list-disc pl-6 mb-6">

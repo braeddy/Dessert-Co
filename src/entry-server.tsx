@@ -4,12 +4,14 @@ import { StaticRouter } from 'react-router-dom';
 import { Writable } from 'node:stream';
 import App from './App';
 import { initI18n } from './i18n';
+import it from './locales/it';
 
 // Pagine generate in HTML durante la build (vedi scripts/prerender.mjs).
 // "404.html" viene servita da Vercel, con codice 404, per ogni indirizzo inesistente.
+// title: titolo della pagina, se diverso da quello del sito in index.html
 export const prerenderedPages = [
   { route: '/', file: 'index.html' },
-  { route: '/privacy-policy', file: 'privacy-policy/index.html' },
+  { route: '/privacy-policy', file: 'privacy-policy/index.html', title: it.privacy.metaTitle },
   { route: '/404', file: '404.html', notFound: true },
 ];
 

@@ -157,6 +157,7 @@ const translation = {
   },
   marquee: ["Wedding cakes", "Birthdays", "Christenings", "Communions", "Anniversaries", "Graduations", "Events"],
   header: {
+    language: "Language",
     cta: "Get a quote",
     services: "Services",
     home: "Home",
@@ -184,6 +185,7 @@ const translation = {
     contact: "Contact us",
   },
   privacy: {
+    metaTitle: "Privacy policy – Dessert&Co",
     title: "Privacy Policy",
     lastUpdated: "Last updated: October 15, 2026",
     intro: "This policy explains which personal data we collect through the website, why we use it and what your rights are, under EU Regulation 2016/679 (GDPR).",

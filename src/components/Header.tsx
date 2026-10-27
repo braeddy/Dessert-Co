@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
@@ -20,9 +20,31 @@ const LanguageSwitcher: React.FC<{ align?: 'left' | 'right'; direction?: 'down' 
   align = 'right',
   direction = 'down',
 }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const listId = useId();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Da chiusa la tendina è solo trasparente: inert toglie le lingue dalla sequenza del tasto Tab
+  useEffect(() => {
+    if (listRef.current) listRef.current.inert = !dropdownOpen;
+  }, [dropdownOpen]);
+
+  // Esc chiude la tendina e riporta il focus sul pulsante della lingua. Ferma l'evento,
+  // così non chiude anche il menu mobile in cui la tendina può trovarsi
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      e.stopImmediatePropagation();
+      setDropdownOpen(false);
+      toggleRef.current?.focus();
+    };
+    window.addEventListener('keydown', handleKey, { capture: true });
+    return () => window.removeEventListener('keydown', handleKey, { capture: true });
+  }, [dropdownOpen]);
 
   // Chiude il menu cliccando fuori
   useEffect(() => {
@@ -48,16 +70,20 @@ const LanguageSwitcher: React.FC<{ align?: 'left' | 'right'; direction?: 'down' 
   return (
     <div className="relative" ref={ref}>
       <button
+        ref={toggleRef}
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        aria-haspopup="listbox"
         aria-expanded={dropdownOpen}
+        aria-controls={listId}
+        aria-label={`${t('header.language', 'Lingua')}: ${languages.find(({ code }) => code === currentLanguage)?.label ?? currentLanguage}`}
         className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-bakery-cocoa transition-colors hover:bg-bakery-pink/50"
       >
         {currentLanguage.toUpperCase()}
         <ChevronDown size={14} className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
       </button>
+      {/* Semplice gruppo di pulsanti: la lingua attiva è indicata da aria-current */}
       <div
-        role="listbox"
+        ref={listRef}
+        id={listId}
         className={`absolute ${align === 'right' ? 'right-0' : 'left-0'} ${
           direction === 'up' ? 'bottom-full mb-2 origin-bottom-left' : 'top-full mt-2 origin-top'
         } w-40 overflow-hidden rounded-2xl border border-bakery-brown/10 bg-white/95 p-1.5 shadow-soft backdrop-blur-xl transition-all duration-200 ${
@@ -67,8 +93,8 @@ const LanguageSwitcher: React.FC<{ align?: 'left' | 'right'; direction?: 'down' 
         {languages.map(({ code, label }) => (
           <button
             key={code}
-            role="option"
-            aria-selected={currentLanguage === code}
+            lang={code}
+            aria-current={currentLanguage === code ? 'true' : undefined}
             onClick={() => changeLanguage(code)}
             className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm transition-colors ${
               currentLanguage === code ? 'bg-bakery-pink/60 font-semibold text-bakery-cocoa' : 'text-bakery-brown hover:bg-bakery-ivory'

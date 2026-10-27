@@ -157,6 +157,7 @@ const translation = {
   },
   marquee: ["Hochzeitstorten", "Geburtstage", "Taufen", "Kommunionen", "Jubiläen", "Abschlüsse", "Events"],
   header: {
+    language: "Sprache",
     cta: "Angebot anfragen",
     services: "Leistungen",
     home: "Startseite",
@@ -184,6 +185,7 @@ const translation = {
     contact: "Kontakt",
   },
   privacy: {
+    metaTitle: "Datenschutzerklärung – Dessert&Co",
     title: "Datenschutzerklärung",
     lastUpdated: "Letzte Aktualisierung: 15. Oktober 2026",
     intro: "Diese Erklärung beschreibt, welche personenbezogenen Daten wir über die Website erheben, wofür wir sie verwenden und welche Rechte Sie gemäß der EU-Verordnung 2016/679 (DSGVO) haben.",
