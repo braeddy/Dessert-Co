@@ -17,7 +17,8 @@ function App() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Passivo: il browser può scorrere la pagina senza aspettare questo listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
