@@ -2,7 +2,6 @@ import React from 'react';
 import { Instagram, Facebook, ArrowUp } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './LogoBG';
-import WhatsAppIcon from './WhatsAppIcon';
 import { useTranslation } from 'react-i18next';
 import { contactInfo, navSections } from '../constants';
 
@@ -38,9 +37,6 @@ const Footer: React.FC = () => {
               </a>
               <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={socialClass}>
                 <Facebook size={18} />
-              </a>
-              <a href={contactInfo.whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className={socialClass}>
-                <WhatsAppIcon size={18} />
               </a>
             </div>
           </div>
