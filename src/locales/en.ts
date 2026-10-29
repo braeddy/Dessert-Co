@@ -66,6 +66,8 @@ const translation = {
     address: "Via Domenico Cimarosa 5/a, Piombino 57025, Province of Livorno, Italy",
     phoneTitle: "Phone",
     phone: "+39 349 413 6253",
+    whatsappTitle: "WhatsApp",
+    whatsapp: "Message us on WhatsApp",
     emailTitle: "Email",
     email: "ddessert.co@gmail.com",
     hoursTitle: "Opening Hours",
@@ -150,6 +152,7 @@ const translation = {
     description: "Tell us what you dream of: together we'll create the perfect cake.",
     button: "Request a quote",
     call: "Call us",
+    whatsapp: "Message us on WhatsApp",
   },
   marquee: ["Wedding cakes", "Birthdays", "Christenings", "Communions", "Anniversaries", "Graduations", "Events"],
   header: {

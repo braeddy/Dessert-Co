@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, MessageCircle, Phone } from 'lucide-react';
 import Reveal from './Reveal';
 import { useTranslation } from 'react-i18next';
 import { contactInfo } from '../constants';
@@ -44,6 +44,15 @@ const CallToAction: React.FC = () => {
             >
               <Phone size={16} />
               {t('cta.call')}
+            </a>
+            <a
+              href={contactInfo.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10"
+            >
+              <MessageCircle size={16} />
+              {t('cta.whatsapp')}
             </a>
           </div>
         </div>

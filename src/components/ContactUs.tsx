@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, Clock, CheckCircle2, AlertCircle, Navigation, Loader2 } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, Clock, CheckCircle2, AlertCircle, Navigation, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Section from '../layout/Section';
 import Reveal from './Reveal';
@@ -106,6 +106,7 @@ const ContactUs: React.FC = () => {
   const infoItems = [
     { icon: MapPin, title: t('contact.addressTitle'), value: t('contact.address'), href: contactInfo.mapsUrl, external: true },
     { icon: Phone, title: t('contact.phoneTitle'), value: t('contact.phone'), href: contactInfo.phoneHref },
+    { icon: MessageCircle, title: t('contact.whatsappTitle'), value: t('contact.whatsapp'), href: contactInfo.whatsappUrl, external: true },
     { icon: Mail, title: t('contact.emailTitle'), value: t('contact.email'), href: contactInfo.emailHref },
   ];
 

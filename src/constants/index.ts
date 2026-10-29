@@ -80,6 +80,7 @@ export const navSections = ['home', 'about', 'services', 'gallery', 'contact'] a
 
 export const contactInfo = {
   phoneHref: 'tel:+393494136253',
+  whatsappUrl: 'https://wa.me/393494136253',
   emailHref: 'mailto:ddessert.co@gmail.com',
   mapsUrl: 'https://maps.app.goo.gl/bX76yy3AF5AbpsUb7',
   instagram: 'https://www.instagram.com/robertadessert?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
