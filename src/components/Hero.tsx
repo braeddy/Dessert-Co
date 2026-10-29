@@ -47,15 +47,16 @@ const Hero: React.FC = () => {
         <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
             <Reveal immediate>
-              <span className="eyebrow">{t('hero.eyebrow')}</span>
+              {/* Il titolo principale per Google è l'etichetta con attività e città; la frase grande sotto è solo grafica */}
+              <h1 className="eyebrow">{t('hero.eyebrow')}</h1>
             </Reveal>
 
             <Reveal immediate delay={100}>
-              <h1 className="mt-6 font-serif text-5xl font-medium leading-[0.98] tracking-tight text-bakery-cocoa sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+              <p className="mt-6 font-serif text-5xl font-medium leading-[0.98] tracking-tight text-bakery-cocoa sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
                 {t('hero.line1')}{' '}
                 <em className="font-light italic text-bakery-rose">{t('hero.accent')}</em>{' '}
                 {t('hero.line2')}
-              </h1>
+              </p>
             </Reveal>
 
             <Reveal immediate delay={200}>
